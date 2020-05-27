@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HairDresser</string>
+    <string name="app_name">Dial a Hairstylist</string>
     <string name="logo">Logo</string>
     <string name="login_account">Login Account</string>
     <string name="username">Username</string>
@@ -19,4 +19,5 @@
     <string name="back">Back</string>
     <string name="service_example">Bridal hair</string>
     <string name="service_title">Select Service Needed</string>
+    <string name="city">City</string>
 </resources>
