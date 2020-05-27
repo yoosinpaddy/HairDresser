@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">HairDresser</string>
+    <string name="logo">Logo</string>
+    <string name="login_account">Login Account</string>
+    <string name="username">Username</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="pass">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="surname">Surname</string>
+    <string name="email">Email</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="contact_number">Contact Number</string>
+    <string name="next">Next</string>
+    <string name="already_have_an_account_login">Already have an account? Login</string>
 </resources>
