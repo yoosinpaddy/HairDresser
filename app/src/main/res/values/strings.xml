@@ -15,4 +15,8 @@
     <string name="contact_number">Contact Number</string>
     <string name="next">Next</string>
     <string name="already_have_an_account_login">Already have an account? Login</string>
+    <string name="enter_location">Enter location</string>
+    <string name="back">Back</string>
+    <string name="service_example">Bridal hair</string>
+    <string name="service_title">Select Service Needed</string>
 </resources>
