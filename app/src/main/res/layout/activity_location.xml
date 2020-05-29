@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".activities.Location">
+    tools:context=".user.activities.Location">
     <Button
         android:id="@+id/back"
         android:layout_width="wrap_content"
