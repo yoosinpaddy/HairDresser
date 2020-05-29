@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="apps.trichain.hairdresser">
-
+<uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
@@ -10,10 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Services"/>
-        <activity android:name=".activities.Location" />
+        <activity android:name=".user.activities.Services"/>
+        <activity android:name=".user.activities.Location" />
         <activity
-            android:name=".activities.Register"
+            android:name=".user.activities.Register"
             android:theme="@style/AppThemeMaterial">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,9 +22,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".user.activities.LoginActivity"
             android:theme="@style/AppThemeMaterial" />
-        <activity android:name=".activities.SplashActivity" />
+        <activity android:name=".user.activities.SplashActivity" />
     </application>
 
 </manifest>

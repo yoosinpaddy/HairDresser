@@ -20,4 +20,8 @@
     <string name="service_example">Bridal hair</string>
     <string name="service_title">Select Service Needed</string>
     <string name="city">City</string>
+    <string name="added_successfully">Added Successfully</string>
+
+<!--    errors-->
+    <string name="error_input">required *</string>
 </resources>

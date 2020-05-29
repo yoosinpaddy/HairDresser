@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tv_message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/red_label_bg"
+    android:drawableStart="@drawable/ic_close"
+    android:gravity="center"
+    android:padding="12dp"
+    android:text="Failed"
+    android:textColor="@color/colorWhite"
+    android:textSize="18sp"
+    app:elevation="16dp"
+    android:drawableLeft="@drawable/ic_close" />

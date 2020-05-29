@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:layout_marginBottom="-40dp"
     android:background="@drawable/background"
-    tools:context=".activities.LoginActivity">
+    tools:context=".user.activities.LoginActivity">
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="250dp"
@@ -20,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/imageView"
-        android:layout_alignBottom="@+id/createAccount"
+        android:layout_alignBottom="@+id/ll1"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -54,7 +55,7 @@
             android:id="@+id/fname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_person_black_24dp"/>
+            android:drawableStart="@drawable/ic_person_black_24dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -79,38 +80,51 @@
 
     <TextView
         android:id="@+id/forgot_password"
-        android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/snameh"
-        android:text="@string/forgot_password"
-        android:layout_marginEnd="16dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/forgot_password"
         android:textColor="@color/black_dull" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login"
-        android:text="@string/login"
         style="@style/Widget.MaterialComponents.Button"
-        android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:textAllCaps="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/forgot_password"
         android:layout_margin="16dp"
-        android:background="@drawable/button_background" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/createAccount"
-        android:text="@string/create_account"
-        style="@style/Widget.MaterialComponents.Button"
-        android:textColor="@color/colorAccent"
-        android:textSize="14sp"
-        android:textStyle="bold"
+        android:background="@drawable/button_background"
+        android:text="@string/login"
         android:textAllCaps="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll1"
+        style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/login"
         android:layout_margin="16dp"
-        android:background="@drawable/button_background_secondary" />
+        android:background="@drawable/button_background_secondary"
+        android:text="@string/create_account"
+        android:textAllCaps="true"
+        android:textColor="@color/colorAccent"
+        android:textSize="14sp"
+        android:textStyle="bold">
+
+        <TextView
+            android:id="@+id/createAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorAccent"
+            android:text="@string/create_account" />
+    </LinearLayout>
 </RelativeLayout>
