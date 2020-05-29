@@ -1,4 +1,4 @@
-package apps.trichain.hairdresser.views;
+package apps.trichain.hairdresser.user.views;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;

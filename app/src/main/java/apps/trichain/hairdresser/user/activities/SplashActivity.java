@@ -1,4 +1,4 @@
-package apps.trichain.hairdresser.activities;
+package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
