@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -78,16 +79,20 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         login = (TextView) findViewById(R.id.login);
         progress = findViewById(R.id.progress);
         apiService = AppUtils.getApiService();
-        register.setOnClickListener(this);
+        //TODO reanable
+        //disabled for design
+//        register.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.register:
+            //TODO reanable
+            //disabled for design
+            /*case R.id.register:
                 if (validatesInputs()){
                     registerUser();
-                }
+                }*/
         }
     }
 
@@ -184,5 +189,8 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         }
 
 
+    }
+    public void next(View view){
+        startActivity(new Intent(this,LoginActivity.class));
     }
 }

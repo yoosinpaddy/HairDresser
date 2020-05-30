@@ -10,21 +10,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".user.activities.Services"/>
-        <activity android:name=".user.activities.Location" />
+        <activity android:name=".user.activities.Services"
+            android:theme="@style/AppThemeMaterial"/>
+        <activity android:name=".user.activities.Location"
+            android:theme="@style/AppThemeMaterial" />
         <activity
             android:name=".user.activities.Register"
             android:theme="@style/AppThemeMaterial">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".user.activities.LoginActivity"
             android:theme="@style/AppThemeMaterial" />
-        <activity android:name=".user.activities.SplashActivity" />
+        <activity android:name=".user.activities.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter></activity>
     </application>
 
 </manifest>
