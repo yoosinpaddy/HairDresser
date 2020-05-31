@@ -1,13 +1,10 @@
 package apps.trichain.hairdresser.network;
 
-import apps.trichain.hairdresser.user.models.UserResponse;
+import apps.trichain.hairdresser.network.responses.UserResponse;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 public interface ApiService {
 
@@ -20,6 +17,13 @@ public interface ApiService {
             @Field("phone") String phone,
             @Field("city") String city,
             @Field("user_type") String user_type,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<UserResponse> userLogin(
+            @Field("email") String email,
             @Field("password") String password
     );
 

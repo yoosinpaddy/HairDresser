@@ -1,7 +1,9 @@
-package apps.trichain.hairdresser.user.models;
+package apps.trichain.hairdresser.network.responses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import apps.trichain.hairdresser.user.models.User;
 
 public class UserResponse {
     @SerializedName("error")

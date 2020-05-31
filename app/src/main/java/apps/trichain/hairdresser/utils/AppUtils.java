@@ -50,7 +50,6 @@ public class AppUtils {
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
     public static final String BASE_URL = "http://192.168.43.106:8000/api/";
-//    public static final String BASE_URL = "https://www.silicon-savannah.com/";
     static boolean alreadyAnimatedDown, alreadyAnimatedUp;
 
     public static ApiService getApiService() {
