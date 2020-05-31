@@ -2,7 +2,8 @@ package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,10 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
-import java.util.zip.Inflater;
 
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.network.ApiService;
-import apps.trichain.hairdresser.network.responses.UserResponse;
+import apps.trichain.hairdresser.user.models.UserResponse;
 import apps.trichain.hairdresser.utils.AppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +28,7 @@ import retrofit2.Response;
 import static apps.trichain.hairdresser.utils.AppUtils.hideView;
 import static apps.trichain.hairdresser.utils.AppUtils.showView;
 
-public class Register extends AppCompatActivity implements View.OnClickListener {
+public class Register extends AppCompatActivity  implements View.OnClickListener {
     private TextInputLayout fnameh;
     private TextInputEditText fname;
     private TextInputLayout snameh;
@@ -46,18 +46,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     private MaterialButton register;
     private TextView login;
     private ProgressBar progress;
-    private String _fname, _sname, _phone, _city, _email, _password;
+    private String _fname,_sname,_phone,_city,_email,_password;
     private ApiService apiService;
-    private boolean isLoading = false;
+    private boolean isLoading=false;
     Call<UserResponse> userResponseCall;
     private static final String TAG = "Register";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initUi();
-        login.setOnClickListener(this);
     }
 
 
@@ -87,83 +85,80 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.register:
-                if (validatesInputs()) {
+                if (validatesInputs()){
                     registerUser();
                 }
-            case R.id.login:
-                Intent l = new Intent(getApplicationContext(), Login.class);
-                startActivity(l);
         }
     }
 
-    public Boolean validatesInputs() {
-        _fname = Objects.requireNonNull(fname.getText()).toString().trim();
-        _sname = Objects.requireNonNull(sname.getText()).toString().trim();
-        _phone = Objects.requireNonNull(phone.getText()).toString().trim();
-        _city = Objects.requireNonNull(city.getText()).toString().trim();
-        _password = Objects.requireNonNull(password.getText()).toString().trim();
-        _email = Objects.requireNonNull(email.getText()).toString().trim();
+    public Boolean validatesInputs(){
+        _fname =  Objects.requireNonNull(fname.getText()).toString().trim();
+        _sname =  Objects.requireNonNull(sname.getText()).toString().trim();
+        _phone =  Objects.requireNonNull(phone.getText()).toString().trim();
+        _city =  Objects.requireNonNull(city.getText()).toString().trim();
+        _password =  Objects.requireNonNull(password.getText()).toString().trim();
+        _email =  Objects.requireNonNull(email.getText()).toString().trim();
 
-        if (_fname.isEmpty()) {
+        if (_fname.isEmpty()){
             fnameh.setError(getResources().getString(R.string.error_input));
             fname.requestFocus();
             return false;
-        } else if (_sname.isEmpty()) {
+        }else if (_sname.isEmpty()) {
             snameh.setError(getResources().getString(R.string.error_input));
             sname.requestFocus();
             return false;
-        } else if (_phone.isEmpty()) {
+        }else if (_phone.isEmpty()) {
             phoneh.setError(getResources().getString(R.string.error_input));
             phone.requestFocus();
             return false;
-        } else if (_city.isEmpty()) {
+        }else if (_city.isEmpty()) {
             cityh.setError(getResources().getString(R.string.error_input));
             city.requestFocus();
             return false;
-        } else if (_password.isEmpty()) {
+        }else if (_password.isEmpty()) {
             passwordh.setError(getResources().getString(R.string.error_input));
             password.requestFocus();
             return false;
-        } else if (_email.isEmpty()) {
+        }else if (_email.isEmpty()) {
             emailh.setError(getResources().getString(R.string.error_input));
             email.requestFocus();
             return false;
-        } else {
+        }else {
             return true;
         }
     }
 
-    public void registerUser() {
+    public void registerUser(){
 
         disableUI(true);
-        userResponseCall = apiService.userRegister(_fname, _sname, _email, _phone, _city, "client", _password);
+        userResponseCall = apiService.userRegister(_fname,_sname,_email,_phone,_city,"client",_password);
         userResponseCall.enqueue(new Callback<UserResponse>() {
             @Override
             public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
                 disableUI(false);
-                UserResponse msg = response.body();
+                UserResponse msg=response.body();
                 if (response.isSuccessful()) {
-                    Log.e("succesbody: ", "----- " + response);
-                    if (msg != null) {
-                        if (!msg.getError()) {
-                            AppUtils.displayToast(Register.this, true, msg.getMessage());
+                    Log.e("succesbody: ", "----- "+response);
+                    if (msg!=null){
+                        if(!msg.getError()){
+                            AppUtils.displayToast(Register.this,true, msg.getMessage());
 
-                        } else {
-                            AppUtils.displayToast(Register.this, false, msg.getMessage());
+                        }else {
+                            AppUtils.displayToast(Register.this,false,msg.getMessage());
                         }
-                    } else {
-                        AppUtils.displayToast(Register.this, false, "something bad happened!");
+                    }else{
+                        AppUtils.displayToast(Register.this,false,"something bad happened!");
                     }
                 } else {
-                    Log.e("errorbody: ", "----- " + response);
-                    AppUtils.displayToast(Register.this, false, "Please try again!!");
+                    Log.e("errorbody: ", "----- "+response);
+                    AppUtils.displayToast(Register.this,false,"Please try again!!");
                 }
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 disableUI(false);
-                Log.e(TAG, "onFailure: " + call.request().url().toString());
+                Log.e(TAG, "onFailure: "+call.request().url().toString() );
                 if (call.isCanceled()) {
                     Log.d(TAG, "onFailure: Canceled! " + t.getLocalizedMessage());
                 } else {
@@ -173,15 +168,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
         });
     }
 
-    private void disableUI(Boolean value) {
-        if (value) {
-            isLoading = true;
+    private void disableUI(Boolean value){
+        if (value){
+            isLoading=true;
             Register.this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             hideView(register);
             showView(progress);
-        } else {
-            isLoading = false;
+        }
+        else {
+            isLoading=false;
             Register.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             hideView(progress);
             showView(register);
