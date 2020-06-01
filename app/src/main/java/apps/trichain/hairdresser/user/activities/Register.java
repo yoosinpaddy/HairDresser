@@ -47,7 +47,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
     private MaterialButton register;
     private TextView login;
     private ProgressBar progress;
-    private String _fname,_sname,_phone,_city,_email,_password;
+    private String _fname,_sname,_phone,_city,_email,_password,_cpassword;
     private ApiService apiService;
     private boolean isLoading=false;
     Call<UserResponse> userResponseCall;
@@ -81,7 +81,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         apiService = AppUtils.getApiService();
         //TODO reanable
         //disabled for design
-//        register.setOnClickListener(this);
+        register.setOnClickListener(this);
     }
 
     @Override
@@ -89,10 +89,10 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         switch (v.getId()) {
             //TODO reanable
             //disabled for design
-            /*case R.id.register:
+            case R.id.register:
                 if (validatesInputs()){
                     registerUser();
-                }*/
+                }
         }
     }
 
@@ -102,6 +102,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         _phone =  Objects.requireNonNull(phone.getText()).toString().trim();
         _city =  Objects.requireNonNull(city.getText()).toString().trim();
         _password =  Objects.requireNonNull(password.getText()).toString().trim();
+        _cpassword =  Objects.requireNonNull(passwordr.getText()).toString().trim();
         _email =  Objects.requireNonNull(email.getText()).toString().trim();
 
         if (_fname.isEmpty()){
@@ -123,6 +124,14 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         }else if (_password.isEmpty()) {
             passwordh.setError(getResources().getString(R.string.error_input));
             password.requestFocus();
+            return false;
+        }else if (_cpassword.isEmpty()) {
+            passwordrh.setError(getResources().getString(R.string.error_input));
+            passwordr.requestFocus();
+            return false;
+        }else if(!_password.equals(_cpassword)){
+            passwordrh.setError(getResources().getString(R.string.pass_error_input));
+            passwordr.requestFocus();
             return false;
         }else if (_email.isEmpty()) {
             emailh.setError(getResources().getString(R.string.error_input));
@@ -147,6 +156,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
                     if (msg!=null){
                         if(!msg.getError()){
                             AppUtils.displayToast(Register.this,true, msg.getMessage());
+                            startActivity(new Intent(Register.this,LoginActivity.class));
 
                         }else {
                             AppUtils.displayToast(Register.this,false,msg.getMessage());
@@ -176,14 +186,25 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
     private void disableUI(Boolean value){
         if (value){
             isLoading=true;
-            Register.this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            fname.setEnabled(false);
+            sname.setEnabled(false);
+            email.setEnabled(false);
+            password.setEnabled(false);
+            passwordr.setEnabled(false);
+            phone.setEnabled(false);
+            city.setEnabled(false);
             hideView(register);
             showView(progress);
         }
         else {
             isLoading=false;
-            Register.this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            fname.setEnabled(true);
+            sname.setEnabled(true);
+            email.setEnabled(true);
+            password.setEnabled(true);
+            passwordr.setEnabled(true);
+            phone.setEnabled(true);
+            city.setEnabled(true);
             hideView(progress);
             showView(register);
         }
