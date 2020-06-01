@@ -48,11 +48,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void initUi() {
-        email = findViewById(R.id.email);
+        email = findViewById(R.id.fname);
         password = findViewById(R.id.password);
-        usernamelayout = findViewById(R.id.usernamelayout);
-        passlayout = findViewById(R.id.passlayout);
-        loginbutton = findViewById(R.id.loginbutton);
+        usernamelayout = findViewById(R.id.cityh);
+        passlayout = findViewById(R.id.snameh);
+        loginbutton = findViewById(R.id.login);
         createAccount = findViewById(R.id.createAccount);
 
         apiService = AppUtils.getApiService();
@@ -81,7 +81,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.loginbutton:
+            case R.id.login:
                 if (validatesInputs()) {
                     loginUser();
                 }

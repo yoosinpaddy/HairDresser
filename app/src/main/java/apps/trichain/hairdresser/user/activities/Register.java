@@ -2,8 +2,7 @@ package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +18,7 @@ import java.util.Objects;
 
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.network.ApiService;
-import apps.trichain.hairdresser.user.models.UserResponse;
+import apps.trichain.hairdresser.network.responses.UserResponse;
 import apps.trichain.hairdresser.utils.AppUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,6 +78,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         progress = findViewById(R.id.progress);
         apiService = AppUtils.getApiService();
         register.setOnClickListener(this);
+        login.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +88,10 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
                 if (validatesInputs()){
                     registerUser();
                 }
+
+            case R.id.login:
+                Intent i = new Intent(Register.this,Login.class);
+                startActivity(i);
         }
     }
 
