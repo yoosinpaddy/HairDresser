@@ -154,7 +154,6 @@ public class ServiceAdpater extends RecyclerView.Adapter<BaseViewHolder> impleme
     public class ViewHolder extends BaseViewHolder {
         TextView tv_service_name, tv_service_price;
         ImageView img_service;
-        RelativeLayout service_layout;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -162,7 +161,6 @@ public class ServiceAdpater extends RecyclerView.Adapter<BaseViewHolder> impleme
             tv_service_name = itemView.findViewById(R.id.tv_service_name);
             tv_service_price = itemView.findViewById(R.id.tv_service_price);
             img_service = itemView.findViewById(R.id.img_service);
-            service_layout = itemView.findViewById(R.id.service_layout);
 
         }
 

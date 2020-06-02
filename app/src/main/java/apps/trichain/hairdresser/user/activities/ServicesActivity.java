@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,8 +68,8 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         retry = findViewById(R.id.retry);
         retry.setOnClickListener(this);
         _token = "Bearer" + " " + sharedPrefManager.getUserToken();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ServicesActivity.this);
-        recycler.setLayoutManager(layoutManager);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(ServicesActivity.this);
+        recycler.setLayoutManager(new StaggeredGridLayoutManager(2 , StaggeredGridLayoutManager.VERTICAL));
         recycler.setItemAnimator(new DefaultItemAnimator());
         if (NetworkUtils.getConnectivityStatus(ServicesActivity.this)) {
             loadServices();
@@ -111,10 +112,7 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
                         Log.e("isServices", "......" + response.body());
                         if (!msg.getError()) {
                             AppUtils.displayToast(ServicesActivity.this, true, msg.getMessage());
-//                            initServiceRecyclerView(msg.getService());
-                            serviceAdpater = new ServiceAdpater(ServicesActivity.this,msg.getService());
-                            recycler.setAdapter(serviceAdpater);
-                            serviceAdpater.notifyDataSetChanged();
+                            initServiceRecyclerView(msg.getService());
                         } else {
                             AppUtils.displayToast(ServicesActivity.this, false, msg.getMessage());
                         }
@@ -144,10 +142,7 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
 
 
     private void initServiceRecyclerView(List<Service> serviceList){
-        serviceAdpater = new ServiceAdpater(this,serviceList);
-        recycler.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recycler.setLayoutManager(layoutManager);
+        serviceAdpater = new ServiceAdpater(ServicesActivity.this,serviceList);
         recycler.addOnItemTouchListener(new RecyclerTouchListener(this, recycler,  new RecyclerTouchListener.ClickListener(){
             @Override
             public void onClick(View view, int position) {
