@@ -21,7 +21,6 @@ public class RetrofitClient {
             Interceptor headerInterceptor = chain -> {
                 Request request = chain.request().newBuilder()
                         .addHeader("Accept", "application/json")
-                        .addHeader("Content-Type", "application/x-www-form-urlencoded")
                         .build();
                 return chain.proceed(request);
             };

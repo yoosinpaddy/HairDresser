@@ -25,4 +25,9 @@
 <!--    errors-->
     <string name="error_input">required *</string>
     <string name="pass_error_input">Password mismatch</string>
+    <string name="service_featured_image">service featured image</string>
+    <string name="service_name">Service Name</string>
+    <string name="no_internet_conection">No internet conection</string>
+    <string name="data_check">Please turn on your mobile data or wifi</string>
+    <string name="retry">Retry</string>
 </resources>

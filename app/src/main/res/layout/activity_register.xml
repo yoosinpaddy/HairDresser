@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
-    tools:context=".user.activities.Register">
+    tools:context=".user.activities.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -61,7 +61,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/snameh"
+            android:id="@+id/passwordlayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/snameh"
+            android:layout_below="@+id/passwordlayout"
             android:layout_marginStart="16dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="16dp"
@@ -134,7 +134,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordr"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -158,7 +159,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/cityh"
+            android:id="@+id/emaillayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -179,7 +180,7 @@
 
         <RelativeLayout
             android:id="@+id/submitlayout"
-            android:layout_below="@+id/cityh"
+            android:layout_below="@+id/emaillayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <com.google.android.material.button.MaterialButton
@@ -195,14 +196,13 @@
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:onClick="next"
             android:visibility="visible"/>
             <ProgressBar
                 android:id="@+id/progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
     </RelativeLayout>
         <TextView
             android:id="@+id/login"

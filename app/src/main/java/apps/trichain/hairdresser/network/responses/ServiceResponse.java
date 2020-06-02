@@ -1,18 +1,22 @@
-package apps.trichain.hairdresser.user.models;
+package apps.trichain.hairdresser.network.responses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class UserResponse {
+import java.util.List;
+
+import apps.trichain.hairdresser.user.models.Service;
+
+public class ServiceResponse {
     @SerializedName("error")
     @Expose
     private Boolean error;
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("user")
+    @SerializedName("service")
     @Expose
-    private User user;
+    private List<Service> service;
 
     public Boolean getError() {
         return error;
@@ -30,12 +34,11 @@ public class UserResponse {
         this.message = message;
     }
 
-    public User getUser() {
-        return user;
+    public List<Service> getService() {
+        return service;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setService(List<Service> service) {
+        this.service = service;
     }
-
 }

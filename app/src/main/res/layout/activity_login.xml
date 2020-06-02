@@ -42,28 +42,28 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/cityh"
+        android:id="@+id/emaillayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/lgTv"
         android:layout_margin="16dp"
-        android:hint="@string/username"
+        android:hint="@string/email"
         app:hintTextColor="@color/black_dull">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/fname"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:drawableStart="@drawable/ic_person_black_24dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/snameh"
+        android:id="@+id/passwordlayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/cityh"
+        android:layout_below="@+id/emaillayout"
         android:layout_marginStart="16dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
@@ -75,41 +75,52 @@
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_lock_black_24dp" />
+            android:drawableStart="@drawable/ic_lock_black_24dp"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/forgot_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/snameh"
-        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/passwordlayout"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
         android:text="@string/forgot_password"
         android:textColor="@color/black_dull" />
 
+    <RelativeLayout
+        android:id="@+id/submitlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/forgot_password">
     <com.google.android.material.button.MaterialButton
         android:id="@+id/login"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/forgot_password"
         android:layout_margin="16dp"
         android:background="@drawable/button_background"
         android:text="@string/login"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
-        android:onClick="next"
-        android:textStyle="bold" />
-
+        android:textStyle="bold"
+        android:visibility="visible"/>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
     <LinearLayout
         android:id="@+id/ll1"
         style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/login"
+        android:layout_below="@+id/submitlayout"
         android:layout_margin="16dp"
         android:background="@drawable/button_background_secondary"
         android:text="@string/create_account"

@@ -1,16 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/service_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/service_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="2dp"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="2dp">
 
-    <TextView
+    <ImageView
+        android:id="@+id/img_service"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_centerVertical="true"
+        android:layout_margin="4dp"
+        android:contentDescription="@string/service_featured_image"
+        android:scaleType="fitCenter" />
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_service_name"
+        android:layout_marginBottom="8dp"
+        android:layout_toEndOf="@id/img_service">
+
+        <TextView
+            android:id="@+id/tv_service_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@color/colorAccent"
+            android:fontFamily="@font/crimson_bold"
+            android:text="Ksh. 1,000"
+            android:textColor="@color/colorWhite" />
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:id="@+id/tv_service_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@id/img_service"
+        android:layout_toRightOf="@id/img_service"
         android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/service_checkBox"
-        android:text="@string/service_example" />
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="@string/service_name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
+
 </RelativeLayout>

@@ -13,6 +13,12 @@ public class User {
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("phone")
+    @Expose
+    private String phone;
+    @SerializedName("city")
+    @Expose
+    private String city;
     @SerializedName("user_type")
     @Expose
     private String userType;
@@ -71,4 +77,20 @@ public class User {
         this.token = token;
     }
 
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
 }

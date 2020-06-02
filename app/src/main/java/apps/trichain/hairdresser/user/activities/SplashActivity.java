@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
-import java.util.Random;
-
 import apps.trichain.hairdresser.R;
 
 public class SplashActivity extends AppCompatActivity {
@@ -36,8 +34,10 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(new Intent(SplashActivity.this, Register.class));
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                finish();
             }
-        },3200);
+        },1200);
     }
 }

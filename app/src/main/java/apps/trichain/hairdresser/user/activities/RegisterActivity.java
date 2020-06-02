@@ -2,13 +2,10 @@ package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -20,16 +17,18 @@ import java.util.Objects;
 
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.network.ApiService;
-import apps.trichain.hairdresser.user.models.UserResponse;
+import apps.trichain.hairdresser.network.responses.UserResponse;
 import apps.trichain.hairdresser.utils.AppUtils;
+import apps.trichain.hairdresser.utils.NetworkUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static apps.trichain.hairdresser.utils.AppUtils.displayToast;
 import static apps.trichain.hairdresser.utils.AppUtils.hideView;
 import static apps.trichain.hairdresser.utils.AppUtils.showView;
 
-public class Register extends AppCompatActivity  implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity  implements View.OnClickListener {
     private TextInputLayout fnameh;
     private TextInputEditText fname;
     private TextInputLayout snameh;
@@ -63,7 +62,7 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
     private void initUi() {
         fnameh = (TextInputLayout) findViewById(R.id.fnameh);
         fname = (TextInputEditText) findViewById(R.id.fname);
-        snameh = (TextInputLayout) findViewById(R.id.snameh);
+        snameh = (TextInputLayout) findViewById(R.id.passwordlayout);
         sname = (TextInputEditText) findViewById(R.id.sname);
         emailh = (TextInputLayout) findViewById(R.id.emailh);
         email = (TextInputEditText) findViewById(R.id.email);
@@ -73,26 +72,34 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         passwordr = (TextInputEditText) findViewById(R.id.passwordr);
         phoneh = (TextInputLayout) findViewById(R.id.phoneh);
         phone = (TextInputEditText) findViewById(R.id.phone);
-        cityh = (TextInputLayout) findViewById(R.id.cityh);
+        cityh = (TextInputLayout) findViewById(R.id.emaillayout);
         city = (TextInputEditText) findViewById(R.id.city);
         register = (MaterialButton) findViewById(R.id.register);
         login = (TextView) findViewById(R.id.login);
         progress = findViewById(R.id.progress);
         apiService = AppUtils.getApiService();
-        //TODO reanable
-        //disabled for design
+        login.setOnClickListener(this);
         register.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            //TODO reanable
-            //disabled for design
             case R.id.register:
                 if (validatesInputs()){
-                    registerUser();
+                    if (NetworkUtils.getConnectivityStatus(RegisterActivity.this)){
+                        registerUser();
+                    }else {
+                        displayToast(RegisterActivity.this,false,"No internet connection!");
+                    }
+
                 }
+                break;
+            case R.id.login:
+                Intent i = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                break;
         }
     }
 
@@ -155,24 +162,27 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
                     Log.e("succesbody: ", "----- "+response);
                     if (msg!=null){
                         if(!msg.getError()){
-                            AppUtils.displayToast(Register.this,true, msg.getMessage());
-                            startActivity(new Intent(Register.this,LoginActivity.class));
+                            AppUtils.displayToast(RegisterActivity.this,true, msg.getMessage());
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                            overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                            finish();
 
                         }else {
-                            AppUtils.displayToast(Register.this,false,msg.getMessage());
+                            AppUtils.displayToast(RegisterActivity.this,false,msg.getMessage());
                         }
                     }else{
-                        AppUtils.displayToast(Register.this,false,"something bad happened!");
+                        AppUtils.displayToast(RegisterActivity.this,false,"something bad happened!");
                     }
                 } else {
                     Log.e("errorbody: ", "----- "+response);
-                    AppUtils.displayToast(Register.this,false,"Please try again!!");
+                    AppUtils.displayToast(RegisterActivity.this,false,"Please try again!!");
                 }
             }
 
             @Override
             public void onFailure(Call<UserResponse> call, Throwable t) {
                 disableUI(false);
+                AppUtils.displayToast(RegisterActivity.this,false,"Failed to register!!");
                 Log.e(TAG, "onFailure: "+call.request().url().toString() );
                 if (call.isCanceled()) {
                     Log.d(TAG, "onFailure: Canceled! " + t.getLocalizedMessage());
@@ -210,8 +220,5 @@ public class Register extends AppCompatActivity  implements View.OnClickListener
         }
 
 
-    }
-    public void next(View view){
-        startActivity(new Intent(this,LoginActivity.class));
     }
 }

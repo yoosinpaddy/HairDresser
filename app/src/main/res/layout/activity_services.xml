@@ -5,56 +5,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorWhite"
-    tools:context=".user.activities.Services">
-    <Button
-        android:id="@+id/back"
-        android:layout_width="wrap_content"
+    tools:context=".user.activities.ServicesActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/home_toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
-        android:text="@string/back"
-        android:layout_margin="8dp"
-        android:textSize="14sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>
+        android:background="@color/colorPrimary"
+        android:padding="8dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:elevation="5dp"
+        app:layout_collapseMode="pin"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/lgTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/back"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="5dp"
-        android:text="@string/service_title"
-        android:textColor="@color/colorBlack"
-        android:textSize="22sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tv_home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="22sp" />
 
+            <SearchView
+                android:id="@+id/farmer_search"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="end|center_vertical"
+                android:layout_margin="6dp"
+                android:background="@drawable/search_bg"
+                android:iconifiedByDefault="true"
+                app:queryHint="Search Products" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lgTv"
-        android:layout_margin="16dp"
+        android:layout_below="@+id/home_toolbar"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="visible"
         tools:itemCount="5"
-        tools:listitem="@layout/item_service"/>
+        tools:listitem="@layout/item_service" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/next"
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:id="@+id/error_layout"
+        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/button_background"
-        android:text="@string/next"
-        android:textAllCaps="true"
-        android:textColor="@color/colorWhite"
-        android:textSize="14sp"
-        android:onClick="next"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/no_internet_conection"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/data_check"
+            android:gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/retry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/retry"
+            android:focusable="true"
+            android:clickable="true"
+            android:textColor="@color/colorAccent"
+            android:gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/next"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:layout_marginEnd="16dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:background="@drawable/button_background"-->
+<!--        android:text="@string/next"-->
+<!--        android:textAllCaps="true"-->
+<!--        android:textColor="@color/colorWhite"-->
+<!--        android:textSize="14sp"-->
+<!--        android:onClick="next"-->
+<!--        android:textStyle="bold" />-->
 
 </RelativeLayout>
