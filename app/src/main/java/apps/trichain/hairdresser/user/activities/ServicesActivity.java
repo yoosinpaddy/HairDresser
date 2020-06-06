@@ -2,7 +2,6 @@ package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
@@ -12,15 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import apps.trichain.hairdresser.R;
@@ -52,6 +45,8 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
     private LinearLayout error_layout;
     private  String _token;
     private TextView retry;
+    private SearchView service_Search;
+    LinearLayout queryview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,9 +58,11 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         sharedPrefManager= SharedPrefManager.getInstance(ServicesActivity.this);
         apiService = AppUtils.getApiService();
         recycler =findViewById(R.id.recycler);
+        queryview =findViewById(R.id.queryview);
         progress = findViewById(R.id.progress);
         error_layout = findViewById(R.id.error_layout);
         retry = findViewById(R.id.retry);
+        service_Search = findViewById(R.id.service_Search);
         retry.setOnClickListener(this);
         _token = "Bearer" + " " + sharedPrefManager.getUserToken();
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(ServicesActivity.this);
@@ -146,13 +143,13 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         recycler.addOnItemTouchListener(new RecyclerTouchListener(this, recycler,  new RecyclerTouchListener.ClickListener(){
             @Override
             public void onClick(View view, int position) {
-//                Service service = serviceAdpater.getItem(position);
-//                Intent intent = new Intent(this,ProductDetailsActivivty.class);
-//                Bundle extras = new Bundle();
-//                extras.putSerializable("productitem", product);
-//                intent.putExtras(extras);
-//                startActivity(intent);
-//                Objects.requireNonNull(getActivity()).overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                Service service = serviceAdpater.getItem(position);
+                Intent intent = new Intent(ServicesActivity.this,ServiceDetailActivity.class);
+                Bundle extras = new Bundle();
+                extras.putSerializable("serviceitem", service);
+                intent.putExtras(extras);
+                startActivity(intent);
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
             }
 
             @Override
@@ -164,9 +161,78 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         recycler.setAdapter(serviceAdpater);
         serviceAdpater.notifyDataSetChanged();
 
+        initSearch(serviceAdpater,serviceList);
     }
+
+
+    private void initSearch(ServiceAdpater adpater,List<Service> serviceList){
+        // attach setOnQueryTextListener
+        // to search view defined above
+        service_Search.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener() {
+
+                    // Override onQueryTextSubmit method
+                    // which is call
+                    // when submitquery is searched
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query)
+                    {
+                        // If the list contains the search query
+                        // than filter the adapter
+                        // using the filter method
+                        // with the query as its argument
+                        if (serviceList.contains(query)) {
+                            serviceAdpater.getFilter().filter(query);
+                        }
+                        else {
+                            // Search query not found in List View
+                            showView(queryview);
+                        }
+                        adpater.getFilter().filter(query);
+                        displayToast(ServicesActivity.this,true,query);
+                        return false;
+                    }
+
+                    // This method is overridden to filter
+                    // the adapter according to a search query
+                    // when the user is typing search
+                    @Override
+                    public boolean onQueryTextChange(String newText)
+                    {
+                        if (serviceList.contains(newText)) {
+                            serviceAdpater.getFilter().filter(newText);
+                        }else if (serviceList.isEmpty()){
+                            hideView(queryview);
+                            return true;
+                        }
+                        else {
+                            adpater.getFilter().filter(newText);
+                            // Search query not found in List View
+                            showView(queryview);
+                        }
+
+                        return false;
+                    }
+
+                });
+
+        service_Search.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+                // This is where you can be notified when the `SearchView` is closed
+                // and change your views you see fit.
+                hideView(queryview);
+                return true;
+
+            }
+        });
+
+    }
+
+
     public void next(View view){
-        startActivity(new Intent(this,Location.class));
+        startActivity(new Intent(this, AddressActivity.class));
     }
 
 

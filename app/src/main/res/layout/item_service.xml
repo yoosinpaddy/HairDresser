@@ -8,14 +8,17 @@
     android:layout_margin="@dimen/size_4dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_service"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="90dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
         android:layout_margin="8dp"
+        android:layout_centerHorizontal="true"
         android:background="@drawable/card_background"
-        android:contentDescription="@string/service_featured_image" />
+        android:contentDescription="@string/service_featured_image"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
 
     <TextView
         android:id="@+id/tv_service_price"

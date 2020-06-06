@@ -119,7 +119,7 @@
         android:id="@+id/ll1"
         style="@style/TextAppearance.AppCompat.Widget.Button.Borderless.Colored"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/submitlayout"
         android:layout_margin="16dp"
         android:background="@drawable/button_background_secondary"
@@ -135,6 +135,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:elevation="4dp"
+            android:textAllCaps="true"
+            android:textSize="14sp"
             android:layout_gravity="center"
             android:textColor="@color/colorAccent"
             android:text="@string/create_account" />

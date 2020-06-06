@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+ <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".user.activities.OrderSummary">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appabar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        android:minHeight="?attr/actionBarSize"
+        android:padding="0dp"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:contentInsetLeft="10dp"
+        app:contentInsetRight="10dp"
+        app:contentInsetStart="10dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_cart"
+            style="@style/AppTheme.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/AppTheme.Toolbar"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentStart="true"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:tint="@color/colorWhite"
+                    app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="Summary"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_below="@+id/appabar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+         <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appabar"
+             android:layout_margin="@dimen/dimen_8dp">
+
+        <TextView
+            android:id="@+id/priceSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/size_4dp"
+            android:text="@string/total_price"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/finalSummaryItems"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/priceSummary"
+            android:layout_margin="@dimen/size_4dp"
+            tools:listitem="@layout/item_cart" />
+
+
+
+             <RelativeLayout
+                 android:id="@+id/rl2"
+                 android:layout_width="match_parent"
+                 android:layout_height="0dp"
+                 android:layout_below="@+id/finalSummaryItems"
+                 android:layout_alignParentBottom="true">
+                 <LinearLayout
+                     android:id="@+id/existing_address"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical">
+                 <TextView
+                     android:id="@+id/deliverySection"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/address_title"
+                     android:textSize="22sp"
+                     android:textStyle="bold"
+                     android:textColor="@color/black"
+                     android:layout_centerHorizontal="true"/>
+                 <TextView
+                     android:id="@+id/city"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="California"
+                     android:textSize="22sp"
+                     android:padding="@dimen/dimen_8dp"/>
+                 <TextView
+                     android:id="@+id/phone"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="+123456789"
+                     android:textSize="22sp"
+                     android:padding="@dimen/dimen_8dp"/>
+
+                 <TextView
+                     android:id="@+id/locationDescription"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:padding="@dimen/dimen_8dp"
+                     android:text=" Example street.\n Room 12"
+                     android:textSize="22sp" />
+                     <TextView
+                         android:id="@+id/change_address"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:padding="@dimen/dimen_8dp"
+                         android:text="@string/change_address"
+                         android:textColor="@color/colorAccent"
+                         android:textSize="18sp"
+                         android:clickable="true"
+                         android:focusable="true"
+                         android:layout_gravity="end"/>
+                 </LinearLayout>
+                 <LinearLayout
+                     android:id="@+id/empty_address"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_centerInParent="true"
+                     android:orientation="vertical"
+                     android:visibility="gone">
+                     <TextView
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:padding="@dimen/dimen_8dp"
+                         android:text="@string/no_address_found"
+                         android:textSize="22sp"
+                         android:layout_gravity="center_horizontal"/>
+                     <TextView
+                         android:id="@+id/add_address"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:padding="@dimen/dimen_8dp"
+                         android:text="@string/add_address"
+                         android:textColor="@color/colorAccent"
+                         android:textSize="18sp"
+                         android:clickable="true"
+                         android:focusable="true"
+                         android:layout_gravity="center_horizontal"/>
+                 </LinearLayout>
+             </RelativeLayout>
+
+             <com.google.android.material.button.MaterialButton
+                 android:id="@+id/payment"
+                 android:background="@drawable/fab_background"
+                 android:paddingStart="17dp"
+                 android:paddingEnd="17dp"
+                 android:textColor="@color/colorWhite"
+                 android:layout_width="wrap_content"
+                 android:layout_alignParentBottom="true"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:textSize="22sp"
+                 android:layout_margin="@dimen/size_4dp"
+                 android:text="Pay $100"/>
+
+         </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

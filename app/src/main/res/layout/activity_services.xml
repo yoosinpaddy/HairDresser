@@ -37,7 +37,7 @@
                 android:textSize="22sp" />
 
             <SearchView
-                android:id="@+id/farmer_search"
+                android:id="@+id/service_Search"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="end|center_vertical"
@@ -99,22 +99,22 @@
             android:gravity="center_horizontal"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/queryview"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="No results found!"
+            android:gravity="center_horizontal"/>
+    </LinearLayout>
 
 
-<!--    <com.google.android.material.button.MaterialButton-->
-<!--        android:id="@+id/next"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginStart="16dp"-->
-<!--        android:layout_marginEnd="16dp"-->
-<!--        android:layout_marginBottom="30dp"-->
-<!--        android:background="@drawable/button_background"-->
-<!--        android:text="@string/next"-->
-<!--        android:textAllCaps="true"-->
-<!--        android:textColor="@color/colorWhite"-->
-<!--        android:textSize="14sp"-->
-<!--        android:onClick="next"-->
-<!--        android:textStyle="bold" />-->
 
 </RelativeLayout>

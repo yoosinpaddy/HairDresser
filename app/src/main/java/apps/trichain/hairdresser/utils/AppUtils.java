@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -25,6 +27,9 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.material.snackbar.Snackbar;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,7 +55,8 @@ public class AppUtils {
     private static final int HOUR_MILLIS = 60 * MINUTE_MILLIS;
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 //    public static final String BASE_URL = "http://192.168.43.106:8000/api/";
-    public static final String BASE_URL = "https://api.mati.co.ke/hairstylist/public/api/";
+    public static final String BASE_URL = "http://admin.jamesrobin.gadaiweb.com/api/";
+//    public static final String BASE_URL = "http://api.mati.co.ke/hairstylist/public/api/";
     static boolean alreadyAnimatedDown, alreadyAnimatedUp;
 
     public static ApiService getApiService() {
@@ -154,8 +160,8 @@ public class AppUtils {
 
     public static String FormatCurrency(int raw) {
         String raw_str = String.valueOf(raw);
-        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
-        numberFormat.setCurrency(Currency.getInstance("KES"));
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.US);
+        numberFormat.setCurrency(Currency.getInstance("USD"));
         numberFormat.setMinimumFractionDigits(0);
         String currency = null;
         try {
@@ -164,7 +170,7 @@ public class AppUtils {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        return "Ksh. " + currency;
+        return "$ " + currency;
     }
 
 
@@ -278,6 +284,34 @@ public class AppUtils {
     }
 
 
+    //image operations
+    public static byte[] getImageBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+
+    public static Bitmap getImage(byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
+    }
+
+    public static byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
+    }
+
+    public static Uri getImageUri(byte[] image) throws UnsupportedEncodingException {
+        byte[] buf = image;
+        String mystring = new String(buf, "UTF-8");
+        return Uri.parse(mystring);
+    }
 
 
 }

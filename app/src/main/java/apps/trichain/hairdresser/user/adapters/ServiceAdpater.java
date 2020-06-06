@@ -27,6 +27,7 @@ import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.user.models.Image;
 import apps.trichain.hairdresser.user.models.Service;
 import apps.trichain.hairdresser.utils.AppUtils;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ServiceAdpater extends RecyclerView.Adapter<BaseViewHolder> implements Filterable {
 
@@ -153,7 +154,7 @@ public class ServiceAdpater extends RecyclerView.Adapter<BaseViewHolder> impleme
 
     public class ViewHolder extends BaseViewHolder {
         TextView tv_service_name, tv_service_price;
-        ImageView img_service;
+        CircleImageView img_service;
 
         ViewHolder(View itemView) {
             super(itemView);

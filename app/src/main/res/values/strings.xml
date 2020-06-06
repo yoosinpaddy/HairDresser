@@ -13,16 +13,16 @@
     <string name="email">Email</string>
     <string name="repeat_password">Repeat password</string>
     <string name="contact_number">Contact Number</string>
-    <string name="next">Next</string>
+    <string name="save">Save</string>
     <string name="already_have_an_account_login">Already have an account? Login</string>
-    <string name="enter_location">Enter location</string>
+    <string name="enter_location">Your Address Details</string>
     <string name="back">Back</string>
     <string name="service_example">Bridal hair</string>
     <string name="service_title">Select Service Needed</string>
     <string name="city">City</string>
     <string name="added_successfully">Added Successfully</string>
 
-<!--    errors-->
+    <!--    errors-->
     <string name="error_input">required *</string>
     <string name="pass_error_input">Password mismatch</string>
     <string name="service_featured_image">service featured image</string>
@@ -30,4 +30,16 @@
     <string name="no_internet_conection">No internet conection</string>
     <string name="data_check">Please turn on your mobile data or wifi</string>
     <string name="retry">Retry</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="checkout">Checkout</string>
+    <string name="service">Service</string>
+    <string name="services">Services</string>
+    <string name="total_price">Total Price: </string>
+    <string name="payment_price">Pay: </string>
+    <string name="empty_cart">Your Cart is Empty</string>
+    <string name="address_title">Address</string>
+    <string name="no_address_found">No Address found!</string>
+    <string name="add_address">Add Address</string>
+    <string name="change_address">Change Address</string>
+    <string name="submit">Submit</string>
 </resources>

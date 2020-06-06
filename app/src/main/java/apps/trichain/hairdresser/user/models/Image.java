@@ -4,7 +4,9 @@ package apps.trichain.hairdresser.user.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Image
+import java.io.Serializable;
+
+public class Image implements Serializable
 {
     @SerializedName("image_path")
     @Expose
