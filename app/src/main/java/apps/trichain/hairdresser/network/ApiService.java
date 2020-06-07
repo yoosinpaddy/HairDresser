@@ -1,5 +1,8 @@
 package apps.trichain.hairdresser.network;
 
+import java.util.List;
+
+import apps.trichain.hairdresser.network.responses.OrderResponse;
 import apps.trichain.hairdresser.network.responses.ServiceResponse;
 import apps.trichain.hairdresser.network.responses.UserResponse;
 import retrofit2.Call;
@@ -33,6 +36,19 @@ public interface ApiService {
 
     @GET("service/index")
     Call<ServiceResponse> getServices(
+            @Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @POST("order/store")
+    Call<OrderResponse> postOrder(
+            @Field("service_id[]")List<String> services,
+            @Field("start_date") String start_date,
+            @Field("end_date") String end_date,
+            @Field("description") String description,
+            @Field("title") String title,
+            @Field("city") String city,
+            @Field("phone") String phone,
             @Header("Authorization") String token
     );
 

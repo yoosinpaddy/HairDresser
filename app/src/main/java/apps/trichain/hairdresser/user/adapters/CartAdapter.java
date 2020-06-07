@@ -70,10 +70,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CustomViewHold
         return cartItems.get(position);
     }
 
-    public Integer getServiceId(int position) {
+    public String getServiceId(int position) {
         Cart cart = getItem(position);
 
-        Integer serviceid = cart.getServiceId();
+        String serviceid = cart.getServiceId();
 
         return serviceid;
     }

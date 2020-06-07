@@ -5,11 +5,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.List;
+
 @Entity
 public class Cart implements Serializable {
     @PrimaryKey(autoGenerate = true)
@@ -17,7 +14,7 @@ public class Cart implements Serializable {
 
 
     @ColumnInfo(name = "serviceId")
-    private Integer serviceId;
+    private String serviceId;
 
     @ColumnInfo(name = "title")
     private String title;
@@ -60,11 +57,11 @@ public class Cart implements Serializable {
         this.imagestring = imagestring;
     }
 
-    public Integer getServiceId() {
+    public String getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(Integer serviceId) {
+    public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
     }
 }

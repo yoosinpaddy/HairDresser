@@ -141,7 +141,6 @@
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
-        android:onClick="next"
         android:textStyle="bold" />
 
 </RelativeLayout>

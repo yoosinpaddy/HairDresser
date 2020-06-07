@@ -60,134 +60,375 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.card.MaterialCardView
+
+    <ScrollView
         android:layout_below="@+id/appabar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-         <RelativeLayout
-            android:id="@+id/rl1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/appabar"
-             android:layout_margin="@dimen/dimen_8dp">
 
-        <TextView
-            android:id="@+id/priceSummary"
-            android:layout_width="wrap_content"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/main"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="@dimen/size_4dp"
-            android:text="@string/total_price"
-            android:textColor="@color/black"
-            android:textSize="22sp" />
+            app:cardCornerRadius="3dp"
+            app:cardElevation="3dp"
+            app:cardUseCompatPadding="true">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/finalSummaryItems"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/priceSummary"
-            android:layout_margin="@dimen/size_4dp"
-            tools:listitem="@layout/item_cart" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Order Summary"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total Services " />
+
+                    <TextView
+                        android:id="@+id/totalservices"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="" />
+
+                </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-             <RelativeLayout
-                 android:id="@+id/rl2"
-                 android:layout_width="match_parent"
-                 android:layout_height="0dp"
-                 android:layout_below="@+id/finalSummaryItems"
-                 android:layout_alignParentBottom="true">
-                 <LinearLayout
-                     android:id="@+id/existing_address"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:orientation="vertical">
-                 <TextView
-                     android:id="@+id/deliverySection"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="@string/address_title"
-                     android:textSize="22sp"
-                     android:textStyle="bold"
-                     android:textColor="@color/black"
-                     android:layout_centerHorizontal="true"/>
-                 <TextView
-                     android:id="@+id/city"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="California"
-                     android:textSize="22sp"
-                     android:padding="@dimen/dimen_8dp"/>
-                 <TextView
-                     android:id="@+id/phone"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:text="+123456789"
-                     android:textSize="22sp"
-                     android:padding="@dimen/dimen_8dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Total Price  " />
 
-                 <TextView
-                     android:id="@+id/locationDescription"
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:padding="@dimen/dimen_8dp"
-                     android:text=" Example street.\n Room 12"
-                     android:textSize="22sp" />
-                     <TextView
-                         android:id="@+id/change_address"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:padding="@dimen/dimen_8dp"
-                         android:text="@string/change_address"
-                         android:textColor="@color/colorAccent"
-                         android:textSize="18sp"
-                         android:clickable="true"
-                         android:focusable="true"
-                         android:layout_gravity="end"/>
-                 </LinearLayout>
-                 <LinearLayout
-                     android:id="@+id/empty_address"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_centerInParent="true"
-                     android:orientation="vertical"
-                     android:visibility="gone">
-                     <TextView
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:padding="@dimen/dimen_8dp"
-                         android:text="@string/no_address_found"
-                         android:textSize="22sp"
-                         android:layout_gravity="center_horizontal"/>
-                     <TextView
-                         android:id="@+id/add_address"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:padding="@dimen/dimen_8dp"
-                         android:text="@string/add_address"
-                         android:textColor="@color/colorAccent"
-                         android:textSize="18sp"
-                         android:clickable="true"
-                         android:focusable="true"
-                         android:layout_gravity="center_horizontal"/>
-                 </LinearLayout>
-             </RelativeLayout>
+                    <TextView
 
-             <com.google.android.material.button.MaterialButton
-                 android:id="@+id/payment"
-                 android:background="@drawable/fab_background"
-                 android:paddingStart="17dp"
-                 android:paddingEnd="17dp"
-                 android:textColor="@color/colorWhite"
-                 android:layout_width="wrap_content"
-                 android:layout_alignParentBottom="true"
-                 android:layout_height="wrap_content"
-                 android:layout_centerHorizontal="true"
-                 android:textSize="22sp"
-                 android:layout_margin="@dimen/size_4dp"
-                 android:text="Pay $100"/>
+                        android:id="@+id/priceSummary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="" />
 
-         </RelativeLayout>
+                </LinearLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Transport fee" />
+
+                    <TextView
+                        android:id="@+id/transportfee"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3dp"
+                        android:layout_weight="1"
+                        android:text=" Pending (will update after placing order)"
+                        android:textColor="@color/colorAccent"/>
+
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/submitlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/forgot_password">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/payment"
+                    android:background="@drawable/fab_background"
+                    android:paddingStart="17dp"
+                    android:paddingEnd="17dp"
+                    android:textColor="@color/colorWhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_margin="@dimen/size_4dp"
+                    android:text="Place order"/>
+                <ProgressBar
+                    android:id="@+id/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:visibility="gone"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/addresstitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_alignParentStart="true"
+                        android:padding="4dp"
+                        android:text="Address "
+                        android:textStyle="bold"
+                        android:drawableStart="@drawable/ic_location_on_black_24dp"/>
+                    <TextView
+                        android:id="@+id/change_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="@string/change_address"
+                        android:textColor="@color/colorAccent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_alignParentEnd="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/existing_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/citylayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="City " />
+
+                            <TextView
+                                android:id="@+id/city"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/descriptionlayout"
+                            android:layout_below="@+id/citylayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Description " />
+
+                            <TextView
+                                android:id="@+id/locationDescription"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_below="@+id/descriptionlayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Phone " />
+
+                            <TextView
+                                android:id="@+id/phone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/empty_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_8dp"
+                            android:text="@string/no_address_found"
+                            android:textSize="22sp"
+                            android:layout_gravity="center_horizontal"/>
+                        <TextView
+                            android:id="@+id/add_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/dimen_8dp"
+                            android:text="@string/add_address"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="18sp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:layout_gravity="center_horizontal"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/scheduletitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_weight="1"
+                        android:padding="4dp"
+                        android:text="Schedule"
+                        android:textStyle="bold"
+                        android:drawableStart="@drawable/ic_date_range_black_24dp"/>
+                    <TextView
+                        android:id="@+id/change_schedule"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/dimen_8dp"
+                        android:text="change_schedule"
+                        android:textColor="@color/colorAccent"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/tv_from_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="From " />
+
+                        <TextView
+                            android:id="@+id/tv_from"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/tv_to_layout"
+                        android:layout_below="@+id/tv_from_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="To " />
+
+                        <TextView
+                            android:id="@+id/tv_to"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Payment Mode"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:id="@+id/billingPresent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_alignParentStart="true"
+                        android:textStyle="bold"
+                        android:src="@drawable/paypalbanner"/>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent" />
+
+
+                <TextView
+                    android:id="@+id/titleItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="Services"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/finalSummaryItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+
 </RelativeLayout>

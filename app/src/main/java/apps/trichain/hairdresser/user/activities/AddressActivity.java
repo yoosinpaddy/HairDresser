@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
 import java.util.Objects;
 
 import apps.trichain.hairdresser.R;
@@ -45,6 +46,13 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
         save =findViewById(R.id.save);
         save.setOnClickListener(this);
         addressRepository =new AddressRepository(this);
+
+        addressRepository.getFullAddress().observe(this, addressList -> {
+            assert addressList != null;
+            if(addressList.size() > 0) {
+                intAddresses(addressList);
+            }
+        });
     }
 
 
@@ -63,7 +71,7 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
                             address.setDescription(_description);
                             address.setPhone(_phone);
                             addressRepository.updateAddress(address);
-                            displayToast(AddressActivity.this,false,"Address Updated");
+                            displayToast(AddressActivity.this,true,"Address Updated");
                         }
                     });
                     Intent resultIntent = new Intent();
@@ -74,6 +82,14 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void intAddresses(List<Address> addressList){
+        for (int i = 0; i < addressList.size(); i++) {
+            Address address = addressList.get(i);
+            city.setText(address.getCity());
+            description.setText(address.getDescription());
+            phone.setText(address.getPhone());
+        }
+    }
 
 
     public Boolean validatesInputs() {

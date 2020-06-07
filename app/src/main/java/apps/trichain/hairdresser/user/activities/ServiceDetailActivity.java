@@ -49,7 +49,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
     private  Bitmap bitmapimage=null;
     private Integer pricecrt;
     private String titlecrt;
-    private Integer idcrt;
+    private String idcrt;
     private AtomicInteger itemcount = new AtomicInteger();
     SharedPrefManager sharedPrefManager;
     @Override

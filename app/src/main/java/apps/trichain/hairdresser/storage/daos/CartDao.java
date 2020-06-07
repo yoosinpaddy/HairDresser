@@ -25,7 +25,10 @@ public interface CartDao {
     LiveData<Cart> getItem(int id);
 
     @Query("SELECT * FROM Cart WHERE serviceId =:serviceId")
-    LiveData<List<Cart>> getService(int serviceId);
+    LiveData<Cart> getItemByServiceID(String serviceId);
+
+    @Query("SELECT * FROM Cart WHERE serviceId =:serviceId")
+    LiveData<List<Cart>> getService(String serviceId);
 
 
     @Query("SELECT COUNT(id) FROM Cart")

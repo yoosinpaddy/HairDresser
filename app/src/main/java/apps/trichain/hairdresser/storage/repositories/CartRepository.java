@@ -22,7 +22,7 @@ public class CartRepository {
     }
 
 
-    public void insertItem(Integer service_id,String title,
+    public void insertItem(String service_id, String title,
                            Integer price,
                            byte[] imagestring) {
 
@@ -69,6 +69,21 @@ public class CartRepository {
         }
     }
 
+    public void deleteItemByServiceId(final String serviceId) {
+        final LiveData<Cart> cartitem = getItemByServiceId(serviceId);
+        Log.e("deleteItem: ", String.valueOf(serviceId));
+        if(cartitem != null) {
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    cartTempDb.cartDao().deleteItem(cartitem.getValue());
+                    return null;
+                }
+            }.execute();
+        }
+    }
+
+
     public void deleteCartItem(final Cart cart) {
         new AsyncTask<Void, Void, Void>() {
             @Override
@@ -82,9 +97,12 @@ public class CartRepository {
     public LiveData<Cart> getItem(int id) {
         return cartTempDb.cartDao().getItem(id);
     }
+    public LiveData<Cart> getItemByServiceId(String serviceId) {
+        return cartTempDb.cartDao().getItemByServiceID(serviceId);
+    }
 
-    public LiveData<List<Cart>> getService(int id) {
-        return cartTempDb.cartDao().getService(id);
+    public LiveData<List<Cart>> getService(String serviceId) {
+        return cartTempDb.cartDao().getService(serviceId);
     }
 
 

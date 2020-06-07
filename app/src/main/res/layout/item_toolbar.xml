@@ -53,9 +53,7 @@
                 android:layout_alignParentEnd="true"
                 android:paddingEnd="@dimen/dimen_8dp"
                 app:srcCompat="@drawable/ic_shopping_cart_black_24dp"
-                android:tint="@color/colorWhite"
-                android:layout_alignParentRight="true"
-                android:descendantFocusability="blocksDescendants" />
+                android:tint="@color/colorWhite" />
 
         </RelativeLayout>
 

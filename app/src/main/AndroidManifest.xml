@@ -15,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".user.activities.MyOrdersActivity"></activity>
+        <activity android:name=".user.activities.ConfirmationActivity" />
         <activity
             android:name=".user.activities.OrderSummary"
-            android:theme="@style/AppThemeMaterial"/>
+            android:theme="@style/AppThemeMaterial" />
         <activity
             android:name=".user.activities.CartItemsActivity"
-            android:theme="@style/AppThemeMaterial"/>
+            android:theme="@style/AppThemeMaterial" />
         <activity
             android:name=".user.activities.ServiceDetailActivity"
             android:theme="@style/AppThemeMaterial" />

@@ -67,4 +67,8 @@ dependencies {
 
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Pay pal;
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+
 }

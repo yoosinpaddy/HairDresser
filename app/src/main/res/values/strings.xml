@@ -42,4 +42,6 @@
     <string name="add_address">Add Address</string>
     <string name="change_address">Change Address</string>
     <string name="submit">Submit</string>
+    <string name="total_services">Total Services</string>
+    <string name="address_description">Description</string>
 </resources>

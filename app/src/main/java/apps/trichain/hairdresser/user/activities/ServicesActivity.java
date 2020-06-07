@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
@@ -47,6 +48,7 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
     private TextView retry;
     private SearchView service_Search;
     LinearLayout queryview;
+    ImageView orders, cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +61,14 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         apiService = AppUtils.getApiService();
         recycler =findViewById(R.id.recycler);
         queryview =findViewById(R.id.queryview);
+        cart =findViewById(R.id.cart);
+        orders =findViewById(R.id.orders);
         progress = findViewById(R.id.progress);
         error_layout = findViewById(R.id.error_layout);
         retry = findViewById(R.id.retry);
         service_Search = findViewById(R.id.service_Search);
         retry.setOnClickListener(this);
+        orders.setOnClickListener(this);
         _token = "Bearer" + " " + sharedPrefManager.getUserToken();
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(ServicesActivity.this);
         recycler.setLayoutManager(new StaggeredGridLayoutManager(2 , StaggeredGridLayoutManager.VERTICAL));
@@ -89,6 +94,10 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
                     hideView(recycler);
                     showView(error_layout);
                 }
+                break;
+            case R.id.orders:
+                startActivity(new Intent(ServicesActivity.this,OrderSummary.class));
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
                 break;
         }
 

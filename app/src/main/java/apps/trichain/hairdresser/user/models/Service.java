@@ -10,7 +10,7 @@ import java.util.List;
 public class Service implements Serializable {
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private String id;
     @SerializedName("price")
     @Expose
     private String price;
@@ -27,11 +27,11 @@ public class Service implements Serializable {
     @Expose
     private List<Image> image;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
