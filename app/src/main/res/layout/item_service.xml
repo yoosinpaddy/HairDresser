@@ -1,52 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<RelativeLayout android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main1"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_background"
-    android:orientation="vertical"
-    android:layout_margin="@dimen/size_4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_service"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_margin="8dp"
-        android:layout_centerHorizontal="true"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true">
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/card_background"
-        android:contentDescription="@string/service_featured_image"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+        android:orientation="vertical"
+        android:layout_margin="@dimen/size_4dp">
 
-    <TextView
-        android:id="@+id/tv_service_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/img_service"
-        android:layout_marginTop="@dimen/size_4dp"
-        android:background="@drawable/price_background"
-        android:fontFamily="@font/crimson_bold"
-        android:layout_margin="8dp"
-        android:padding="2dp"
-        android:paddingStart="@dimen/size_4dp"
-        android:text="Ksh. 1,000"
-        android:textColor="@color/colorWhite" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_service"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_margin="8dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/card_background"
+            android:contentDescription="@string/service_featured_image"
+            app:civ_border_width="2dp"
+            app:civ_border_color="#FF000000"/>
 
-
-    <TextView
-        android:id="@+id/tv_service_name"
-        android:layout_width="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_margin="8dp"
-        android:layout_below="@+id/tv_service_price"
-        android:text="Name"
-        android:textSize="12sp" />
-
-
-            </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_service_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_service"
+            android:layout_marginTop="@dimen/size_4dp"
+            android:background="@drawable/price_background"
+            android:fontFamily="@font/crimson_bold"
+            android:layout_margin="8dp"
+            android:padding="2dp"
+            android:paddingStart="@dimen/size_4dp"
+            android:text="Ksh. 1,000"
+            android:textColor="@color/colorWhite" />
 
 
+        <TextView
+            android:id="@+id/tv_service_name"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_margin="8dp"
+            android:layout_below="@+id/tv_service_price"
+            android:text="Name"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

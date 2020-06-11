@@ -7,7 +7,7 @@ import java.util.List;
 
 import apps.trichain.hairdresser.user.models.Order;
 
-public class OrderResponse
+public class OrderStoreResponse
 {
     @SerializedName("error")
     @Expose
@@ -17,7 +17,7 @@ public class OrderResponse
     private String message;
     @SerializedName("order")
     @Expose
-    private List<Order> orderList;
+    private Order order;
 
 
     public Boolean getError() {
@@ -36,11 +36,11 @@ public class OrderResponse
         this.message = message;
     }
 
-    public List<Order> getOrderList() {
-        return orderList;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }

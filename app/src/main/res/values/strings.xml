@@ -44,4 +44,8 @@
     <string name="submit">Submit</string>
     <string name="total_services">Total Services</string>
     <string name="address_description">Description</string>
+    <string name="waiting_approval">Waiting Approval</string>
+    <string name="in_progress">In progress</string>
+    <string name="completed_order">Completed</string>
+    <string name="waiting_payment">Waiting Payment</string>
 </resources>

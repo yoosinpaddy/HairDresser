@@ -3,7 +3,9 @@ package apps.trichain.hairdresser.user.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -22,7 +24,7 @@ public class Order {
     private Integer amount;
     @SerializedName("transport_cost")
     @Expose
-    private Object transportCost;
+    private Integer transportCost;
     @SerializedName("paypal_id")
     @Expose
     private Object paypalId;
@@ -70,11 +72,11 @@ public class Order {
         this.amount = amount;
     }
 
-    public Object getTransportCost() {
+    public Integer getTransportCost() {
         return transportCost;
     }
 
-    public void setTransportCost(Object transportCost) {
+    public void setTransportCost(Integer transportCost) {
         this.transportCost = transportCost;
     }
 

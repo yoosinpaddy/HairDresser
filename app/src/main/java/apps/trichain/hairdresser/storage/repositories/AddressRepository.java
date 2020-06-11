@@ -12,6 +12,8 @@ import java.util.List;
 import apps.trichain.hairdresser.storage.db.HairstylistDb;
 import apps.trichain.hairdresser.user.models.Address;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class AddressRepository {
     private String DB_NAME = "db_address";
 
@@ -32,11 +34,25 @@ public class AddressRepository {
         insertAddress(address);
     }
 
+
+
     private void insertAddress(final Address address) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
                 hairstylistDb.addressDao().insertAddress(address);
+                return null;
+            }
+        }.execute();
+    }
+
+    public void updateAddress(int addressID,String  city,String description,
+                              String phone) {
+
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                hairstylistDb.addressDao().updateAddressById(addressID,city,description,phone);
                 return null;
             }
         }.execute();

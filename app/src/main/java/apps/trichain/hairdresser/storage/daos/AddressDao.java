@@ -31,6 +31,10 @@ public interface AddressDao {
     @Update
     void updateAddress(Address address);
 
+    @Query("UPDATE Address SET city = :city, description = :description, phone = :phone WHERE id =:addressID")
+    void updateAddressById(int addressID,String  city,String description,
+                           String phone);
+
 
     @Delete
     void deleteAddress(Address address);

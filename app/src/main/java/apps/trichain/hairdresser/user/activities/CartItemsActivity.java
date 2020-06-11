@@ -23,6 +23,8 @@ import apps.trichain.hairdresser.user.adapters.CartAdapter;
 import apps.trichain.hairdresser.user.models.Cart;
 import apps.trichain.hairdresser.utils.SwipeToDeleteCallback;
 
+import static apps.trichain.hairdresser.utils.AppUtils.displayToast;
+
 public class CartItemsActivity extends AppCompatActivity  implements View.OnClickListener{
 
     private static final String TAG ="CartItemsActivity" ;
@@ -30,8 +32,9 @@ public class CartItemsActivity extends AppCompatActivity  implements View.OnClic
     ImageView back;
     Button checkout;
     CartAdapter cartAdapter;
-    TextView empty_view;
+    TextView empty_view,instructtitle;
     CartRepository cartRepository;
+    private boolean isCartItem =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +48,7 @@ public class CartItemsActivity extends AppCompatActivity  implements View.OnClic
         checkout =findViewById(R.id.checkout);
         back =findViewById(R.id.back);
         empty_view =findViewById(R.id.empty_view);
+        instructtitle =findViewById(R.id.instructtitle);
         cartrecycler =findViewById(R.id.cartrecycler);
         back.setOnClickListener(this);
         checkout.setOnClickListener(this);
@@ -58,8 +62,12 @@ public class CartItemsActivity extends AppCompatActivity  implements View.OnClic
                 onBackPressed();
                 break;
             case R.id.checkout:
-                startActivity(new Intent(CartItemsActivity.this,OrderSummary.class));
-                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                if (isCartItem){
+                    startActivity(new Intent(CartItemsActivity.this,OrderSummary.class));
+                    overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                    finish();
+                }else displayToast(CartItemsActivity.this,false,"Please add services to cart");
+
                 break;
         }
     }
@@ -68,8 +76,10 @@ public class CartItemsActivity extends AppCompatActivity  implements View.OnClic
             assert cartList != null;
             if(cartList.size() > 0) {
                 empty_view.setVisibility(View.GONE);
+                instructtitle.setVisibility(View.VISIBLE);
                 cartrecycler.setVisibility(View.VISIBLE);
                 initRecylerView(cartList);
+                isCartItem=true;
             } else updateEmptyView();
         });
     }
@@ -85,7 +95,9 @@ public class CartItemsActivity extends AppCompatActivity  implements View.OnClic
 
     private void updateEmptyView() {
         empty_view.setVisibility(View.VISIBLE);
+        instructtitle.setVisibility(View.GONE);
         cartrecycler.setVisibility(View.GONE);
+
     }
 
     private void enableSwipeToDelete() {

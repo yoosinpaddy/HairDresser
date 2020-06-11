@@ -2,6 +2,7 @@ package apps.trichain.hairdresser.user.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.storage.repositories.CartRepository;
+import apps.trichain.hairdresser.user.models.Cart;
 import apps.trichain.hairdresser.user.models.Image;
 import apps.trichain.hairdresser.user.models.Service;
 import apps.trichain.hairdresser.utils.AppUtils;
@@ -52,6 +54,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
     private String idcrt;
     private AtomicInteger itemcount = new AtomicInteger();
     SharedPrefManager sharedPrefManager;
+    private  boolean isinCart = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +72,12 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
         idcrt = service.getId();
         loadProductImgSlider(service.getImage());
         initSlider();
+        cartRepository.getService(idcrt).observe((LifecycleOwner) ServiceDetailActivity.this, carst -> {
+            if (carst.size() > 0 ){
+              isinCart=true;
+                Log.e("onCreate: ", String.valueOf(carst.size()));
+            }
+        });
     }
 
 
@@ -95,6 +104,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
             overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
         });
 
+
     }
 
     @Override
@@ -104,18 +114,15 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
                 if (bitmapimage ==null){
                     bitmapimage = BitmapFactory.decodeResource(this.getResources(), R.drawable.logo);
                 }
-                cartRepository.getService(idcrt).observe((LifecycleOwner) ServiceDetailActivity.this, carst -> {
-                    if (carst.size() <=0 ){
-                        cartRepository.insertItem(idcrt,titlecrt, pricecrt,AppUtils.getImageBytes(bitmapimage));
-                        cartRepository.getService(idcrt).removeObservers(ServiceDetailActivity.this);
-                        Integer items = Integer.parseInt(badgeView.getBadgeText());
-                        items ++;
-                        setCartCount( Integer.parseInt(String.valueOf(items)));
-                     displayToast(ServiceDetailActivity.this,true,"Successfully added to cart");
-                    }if (carst.size()>0){
-                        displayToast(ServiceDetailActivity.this,false,"Service already in cart!");
-                    }
-                });
+                if (isinCart){
+                    displayToast(ServiceDetailActivity.this,false,"Service already in cart!");
+                }else{
+                    cartRepository.insertItem(idcrt,titlecrt, pricecrt,AppUtils.getImageBytes(bitmapimage));
+                    Integer items = Integer.parseInt(badgeView.getBadgeText());
+                    items ++;
+                    setCartCount( Integer.parseInt(String.valueOf(items)));
+                    displayToast(ServiceDetailActivity.this,true,"Successfully added to cart");
+                }
                 break;
             case R.id.back:
                 onBackPressed();

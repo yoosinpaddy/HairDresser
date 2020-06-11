@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/background"
+    tools:context=".user.activities.SplashActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".user.activities.SplashActivity">
-
-
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="250dp"
@@ -27,8 +31,9 @@
         android:padding="@dimen/size_4dp"
         android:outlineAmbientShadowColor="#000000"
         android:progressTint="@color/colorWhite"
-        android:progress="50"
+        android:progress="0"
         android:max="100"
-
         android:layout_alignParentBottom="true" />
-</RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

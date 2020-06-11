@@ -10,13 +10,18 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
@@ -38,20 +43,23 @@ import java.util.Objects;
 
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.network.ApiService;
-import apps.trichain.hairdresser.network.responses.OrderResponse;
+import apps.trichain.hairdresser.network.responses.OrderStoreResponse;
 import apps.trichain.hairdresser.storage.repositories.AddressRepository;
 import apps.trichain.hairdresser.storage.repositories.CartRepository;
 import apps.trichain.hairdresser.user.adapters.CartAdapter;
 import apps.trichain.hairdresser.user.models.Address;
 import apps.trichain.hairdresser.user.models.Cart;
+import apps.trichain.hairdresser.user.models.Image;
 import apps.trichain.hairdresser.utils.AlertDialogHelper;
 import apps.trichain.hairdresser.utils.AppUtils;
+import apps.trichain.hairdresser.utils.NetworkUtils;
 import apps.trichain.hairdresser.utils.PayPalConfig;
 import apps.trichain.hairdresser.utils.SharedPrefManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static apps.trichain.hairdresser.user.activities.OrdersCategoryActivity.PAYPAL_REQUEST_CODE;
 import static apps.trichain.hairdresser.utils.AppUtils.FormatCurrency;
 import static apps.trichain.hairdresser.utils.AppUtils.displayToast;
 import static apps.trichain.hairdresser.utils.AppUtils.hideView;
@@ -63,7 +71,9 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     TextView priceSummary,city,phone,locationDescription,add_address,change_address,change_schedule,totalservices,tv_from,tv_to;
     String str_startDate, str_endDate,str_desc,str_city,str_phone;
     RecyclerView finalSummaryItems;
-    MaterialButton payment;
+    RelativeLayout schedulelayout;
+    MaterialButton placeOrder;
+    ImageView back;
     CartRepository cartRepository;
     AddressRepository addressRepository;
     CartAdapter cartAdapter;
@@ -71,19 +81,14 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
     ProgressBar progress;
     AlertDialogHelper alertDialogHelper;
     private  List<String> servicesids;
+    private  List<Cart> itemsToDelete;
     private ApiService apiService;
-    Call<OrderResponse> orderResponseCall;
+    Call<OrderStoreResponse> orderStoreResponseCall;
     String str_token;
     SharedPrefManager sharedPrefManager;
-    //Paypal intent request code to track onActivityResult method
-    public static final int PAYPAL_REQUEST_CODE = 123;
-    //Paypal Configuration Object
-    private static PayPalConfiguration config = new PayPalConfiguration()
-            // Start with mock environment.  When ready, switch to sandbox (ENVIRONMENT_SANDBOX)
-            // or live (ENVIRONMENT_PRODUCTION)
-            .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
-            .clientId(PayPalConfig.PAYPAL_CLIENT_ID);
     private Integer total = 0;
+    private boolean isAddress =false;
+    private boolean isSchedule =false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,14 +107,17 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         city =findViewById(R.id.city);
         phone =findViewById(R.id.phone);
         finalSummaryItems =findViewById(R.id.finalSummaryItems);
-        payment =findViewById(R.id.payment);
+        placeOrder =findViewById(R.id.placeOrder);
         add_address =findViewById(R.id.add_address);
         change_address =findViewById(R.id.change_address);
         locationDescription =findViewById(R.id.locationDescription);
         tv_from =findViewById(R.id.tv_from);
         tv_to =findViewById(R.id.tv_to);
+        schedulelayout =findViewById(R.id.schedulelayout);
+        back =findViewById(R.id.back);
         progress =findViewById(R.id.progress);
-        payment.setOnClickListener(this);
+        back.setOnClickListener(this);
+        placeOrder.setOnClickListener(this);
         add_address.setOnClickListener(this);
         change_address.setOnClickListener(this);
         change_schedule.setOnClickListener(this);
@@ -119,18 +127,23 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         apiService = AppUtils.getApiService();
         sharedPrefManager = SharedPrefManager.getInstance(this);
         str_token = "Bearer" + " " + sharedPrefManager.getUserToken();
-        Intent intent = new Intent(this, PayPalService.class);
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        startService(intent);
+
     }
 
     @Override
     public void onClick(View v) {
         Intent address = new Intent(OrderSummary.this, AddressActivity.class);
         switch (v.getId()){
-            case R.id.payment:
-//                initiatePayment();
-                postOrder();
+            case R.id.placeOrder:
+                if (!isAddress){
+                    displayToast(OrderSummary.this,false,"Your Address is required");
+                }else if (!isSchedule){
+                    displayToast(OrderSummary.this,false,"Schedule is required");
+                }else {
+                    if (NetworkUtils.getConnectivityStatus(this)){
+                        postOrder();
+                    }else displayToast(OrderSummary.this,false,"No internet connection");
+                }
                 break;
             case R.id.add_address:
                 this.startActivityForResult(address, 1);
@@ -142,7 +155,9 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.change_schedule:
                 changeSchedule();
-
+                break;
+            case R.id.back:
+                onBackPressed();
                 break;
         }
     }
@@ -157,35 +172,6 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         }else if(requestCode == 2){
             if (resultCode == Activity.RESULT_OK) {
                 fetchAddressDetails();
-            }
-        }
-        //If the result is from paypal
-        if (requestCode == PAYPAL_REQUEST_CODE) {
-
-            //If the result is OK i.e. user has not canceled the payment
-            if (resultCode == Activity.RESULT_OK) {
-                //Getting the payment confirmation
-                PaymentConfirmation confirm = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-
-                //if confirmation is not null
-                if (confirm != null) {
-                    try {
-                        //Getting the payment details
-                        String paymentDetails = confirm.toJSONObject().toString(4);
-                        Log.i("paymentExample", paymentDetails);
-                        //Starting a new activity for the payment details and also putting the payment details with intent
-                        startActivity(new Intent(this, ConfirmationActivity.class)
-                                .putExtra("PaymentDetails", paymentDetails)
-                                .putExtra("PaymentAmount", total));
-                        displayToast(OrderSummary.this,true,paymentDetails.toString());
-                    } catch (JSONException e) {
-                        Log.e("paymentExample", "an extremely unlikely failure occurred: ", e);
-                    }
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Log.i("paymentExample", "The user canceled.");
-            } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID) {
-                Log.i("paymentExample", "An invalid Payment or PayPalConfiguration was submitted. Please see the docs.");
             }
         }
     }
@@ -209,9 +195,11 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
                 hideView(empty_address);
                 showView(existing_address);
                 intAddresses(addressList);
+                isAddress=true;
             } else {
                 hideView(existing_address);
                 showView(empty_address);
+                isAddress=false;
             }
         });
     }
@@ -227,17 +215,17 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
 
     private void setPriceSummary(List<Cart> cartList){
         servicesids =new ArrayList<>();
+        itemsToDelete =new ArrayList<>();
         for (int i = 0; i < cartList.size(); i++) {
             Cart cart = cartList.get(i);
             total += cart.getPrice();
             servicesids.add(cart.getServiceId());
+            itemsToDelete.add(cart);
         }
         String totalItems =String.valueOf(cartList.size());
         String pricing =  FormatCurrency(total);
-        String pricing1 = FormatCurrency(total);
         totalservices.setText(totalItems);
         priceSummary.setText(pricing);
-        payment.setText(pricing1);
     }
 
     private void intAddresses(List<Address> addressList){
@@ -252,25 +240,7 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private void initiatePayment(){
-        //Creating a paypalpayment
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(total)), "USD", "Hair Dressing Fee",
-                PayPalPayment.PAYMENT_INTENT_SALE);
-        //Creating Paypal Payment activity intent
-        Intent intent = new Intent(this, PaymentActivity.class);
-        //putting the paypal configuration to the intent
-        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
-        //Puting paypal payment to the intent
-        intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment);
-        //Starting the intent activity for result
-        //the request code will be used on the method onActivityResult
-        startActivityForResult(intent, PAYPAL_REQUEST_CODE);
 
-    }
-
-    private void processOrder(){
-
-    }
 
     private void changeSchedule(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -338,26 +308,24 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
         tv_to.setText(todate);
         str_startDate = fromdate;
         str_endDate =todate;
+        isSchedule = true;
     }
 
     private void postOrder(){
         Log.e(TAG, "postorder: ");
         disableUI(true);
-        orderResponseCall = apiService.postOrder(servicesids, str_startDate,str_endDate,str_desc,str_desc,str_city,str_phone,str_token);
-        orderResponseCall.enqueue(new Callback<OrderResponse>() {
+        orderStoreResponseCall = apiService.postOrder(servicesids,str_endDate,str_endDate,str_desc,str_city,str_phone,str_token);
+        orderStoreResponseCall.enqueue(new Callback<OrderStoreResponse>() {
             @Override
-            public void onResponse(Call<OrderResponse> call, Response<OrderResponse> response) {
+            public void onResponse(Call<OrderStoreResponse> call, Response<OrderStoreResponse> response) {
                 disableUI(false);
-                OrderResponse msg = response.body();
+                OrderStoreResponse msg = response.body();
                 if (response.isSuccessful()) {
                     Log.e("orderposted", "......" + response);
                     if (msg != null) {
                         if (!msg.getError()) {
                             AppUtils.displayToast(OrderSummary.this, true, msg.getMessage());
-                            emptyCart(servicesids);
-                            startActivity(new Intent(OrderSummary.this, MyOrdersActivity.class));
-                            overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
-                            finish();
+                            emptyCart(itemsToDelete);
 
                         } else {
                             AppUtils.displayToast(OrderSummary.this, false, msg.getMessage());
@@ -372,7 +340,7 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
             }
 
             @Override
-            public void onFailure(Call<OrderResponse> call, Throwable t) {
+            public void onFailure(Call<OrderStoreResponse> call, Throwable t) {
                 disableUI(false);
 
                 Log.e(TAG, "onFailure: " + call.request().url().toString());
@@ -388,22 +356,28 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
 
     private void disableUI(Boolean value) {
         if (value) {
-            payment.setEnabled(false);
-            hideView(payment);
+            placeOrder.setEnabled(false);
+            hideView(placeOrder);
             showView(progress);
         } else {
-            payment.setEnabled(true);
+            placeOrder.setEnabled(true);
             hideView(progress);
-            showView(payment);
+            showView(placeOrder);
         }
 
 
     }
 
-    private  void emptyCart(List<String> Cartservicesids){
-        for (int i = 0; i < Cartservicesids.size(); i++) {
-            cartRepository.deleteItemByServiceId(Cartservicesids.get(i));
+    private  void emptyCart(List<Cart> cartList1){
+        for (int i = 0; i < cartList1.size(); i++) {
+            Cart cart = cartList1.get(i);
+            Log.e("emptyCart: serviceid",cartList1.get(i).getServiceId());
+//            cartRepository.deleteItemByServiceId(Cartservicesids.get(i));
+            cartRepository.deleteCartItem(cart);
         }
+        startActivity(new Intent(OrderSummary.this, MyOrdersActivity.class));
+        overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+        finish();
 
     }
     @Override

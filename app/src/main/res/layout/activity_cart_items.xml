@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhiteDull"
     tools:context=".user.activities.CartItemsActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appabar"
@@ -59,12 +58,27 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <TextView
+        android:id="@+id/instructtitle"
+        android:layout_below="@id/appabar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="@dimen/margin"
+        android:layout_marginLeft="@dimen/margin_xlarge"
+        android:layout_marginRight="@dimen/margin_xlarge"
+        android:layout_marginTop="@dimen/dimen_8dp"
+        android:gravity="center"
+        android:text="Swipe left to delete"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:drawableStart="@drawable/ic_info_outline_black_24dp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartrecycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/appabar"
+        android:layout_below="@+id/instructtitle"
         android:layout_marginBottom="@dimen/size_4dp"
         tools:listitem="@layout/item_cart"/>
     <TextView

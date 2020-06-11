@@ -38,6 +38,16 @@ public class SharedPrefManager {
                 .putString("token", user.getToken())
                 .apply();
     }
+    public void storePaypalId(String PayPalId){
+        sharedPreferences.edit()
+                .putString("payPalId", PayPalId)
+                .apply();
+    }
+    public void initUpdateStatus(Boolean isUpdated){
+        sharedPreferences.edit()
+                .putBoolean("isUpdated", isUpdated)
+                .apply();
+    }
 
     public void customerLocation(String location){
         sharedPreferences.edit()
@@ -59,9 +69,17 @@ public class SharedPrefManager {
         return sharedPreferences.getString("token", null);
     }
 
+    public String getPayPalId(){
+        return sharedPreferences.getString("payPalId", null);
+    }
+
 
     public Boolean isLogin() {
         return sharedPreferences.getBoolean("isLoggedIn", false);
+    }
+
+    public Boolean isUpdated() {
+        return sharedPreferences.getBoolean("isUpdated", true);
     }
 
     public Boolean logoutCustomer() {

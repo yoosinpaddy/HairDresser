@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -26,9 +27,14 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
     private static final String TAG = "AddressActivity";
     TextInputEditText city,description,phone;
     TextInputLayout citylayout,descriptionlayout,phonelayout;
-    String _city,_description,_phone;
+    ImageView addres_back;
+    String _city;
+    String _description;
+    String _phone;
+    int addressID;
     MaterialButton save;
     AddressRepository addressRepository;
+    private boolean isNew =true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,14 +49,17 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
         descriptionlayout =findViewById(R.id.descriptionlayout);
         phone =findViewById(R.id.phone);
         phonelayout =findViewById(R.id.phonelayout);
+        addres_back =findViewById(R.id.addres_back);
         save =findViewById(R.id.save);
         save.setOnClickListener(this);
+        addres_back.setOnClickListener(this);
         addressRepository =new AddressRepository(this);
 
         addressRepository.getFullAddress().observe(this, addressList -> {
             assert addressList != null;
             if(addressList.size() > 0) {
                 intAddresses(addressList);
+                isNew=false;
             }
         });
     }
@@ -61,23 +70,25 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.save:
                 if (validatesInputs()){
-                    addressRepository.getFullAddress().observe((LifecycleOwner) AddressActivity.this, addressList -> {
-                        if (addressList.size() <=0 ){
-                            addressRepository.insertAddress(_city,_description,_phone);
-                            displayToast(AddressActivity.this,true,"Address Saved");
-                        }if (addressList.size()>0){
-                            Address address = new Address();
-                            address.setCity(_city);
-                            address.setDescription(_description);
-                            address.setPhone(_phone);
-                            addressRepository.updateAddress(address);
-                            displayToast(AddressActivity.this,true,"Address Updated");
-                        }
-                    });
+                    if (isNew){
+                        addressRepository.getFullAddress().observe((LifecycleOwner) AddressActivity.this, addressList -> {
+                            if (addressList.size() <=0 ){
+                                addressRepository.insertAddress(_city,_description,_phone);
+                                displayToast(AddressActivity.this,true,"Address Saved");
+                            }
+                        });
+                    }else {
+                        addressRepository.updateAddress(addressID,_city,_description,_phone);
+                        displayToast(AddressActivity.this,true,"Address Updated");
+                    }
+
                     Intent resultIntent = new Intent();
                     setResult(RESULT_OK, resultIntent);
                     finish();
                 }
+                break;
+            case R.id.addres_back:
+                onBackPressed();
                 break;
         }
     }
@@ -88,6 +99,7 @@ public class AddressActivity extends AppCompatActivity implements View.OnClickLi
             city.setText(address.getCity());
             description.setText(address.getDescription());
             phone.setText(address.getPhone());
+            addressID =address.getId();
         }
     }
 
