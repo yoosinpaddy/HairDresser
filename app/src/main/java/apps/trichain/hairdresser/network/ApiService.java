@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -63,6 +64,14 @@ public interface ApiService {
     Call<OrderResponse> updateOrder(
             @Field("paypal_id") String paypal_id,
             @Field("order_id") String order_id,
+            @Header("Authorization") String token
+    );
+
+    @FormUrlEncoded
+    @PUT("order/rating")
+    Call<OrderResponse> rateOrder(
+            @Field("rating") Float rating,
+            @Field("order_id") String orderId,
             @Header("Authorization") String token
     );
 }

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.CustomView
         Order order = getItem(position);
 
             holder.date.setText(order.getCreatedAt());
+            holder.ratingbar.setRating(order.getRating());
             holder.total_amount.setText(FormatCurrency(order.getAmount()));
             holder.transportCost.setText(FormatCurrency(order.getTransportCost()));
             holder.grand_total.setText(FormatCurrency(order.getAmount()+order.getTransportCost()));
@@ -65,6 +67,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.CustomView
         }else if (status == 3){
             holder.status.setText(R.string.completed_order);
             hideView(holder.makePayment);
+            showView(holder.ratingbar);
         }else if(status ==4){
             holder.status.setText(R.string.waiting_payment);
             showView(holder.makePayment);
@@ -76,6 +79,16 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.CustomView
             Integer amount = order.getAmount()+order.getTransportCost();
             itemListener.makePayment(view,position,amount,order.getId());
         });
+
+        holder.ratingbar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser) {
+                    itemListener.onRatingBarChange(ratingBar,position,order.getId(), rating);
+                }
+            }
+        });
+
 
     }
 
@@ -105,6 +118,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.CustomView
 
         MaterialButton makePayment ;
         TextView date,total_amount,transportCost,grand_total,status;
+        RatingBar ratingbar;
         
         CustomViewHolder(View itemView) {
             super(itemView);
@@ -114,12 +128,15 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.CustomView
             transportCost = itemView.findViewById(R.id.transportCost);
             grand_total = itemView.findViewById(R.id.grand_total);
             status = itemView.findViewById(R.id.status);
+            ratingbar = itemView.findViewById(R.id.ratingbar);
 
         }
     }
 
     public interface RecyclerViewClickListener {
         public void makePayment(View v, int position,Integer amount,String orderId);
+        void onRatingBarChange(View v, int position, String orderId,float value);
     }
+
 
 }

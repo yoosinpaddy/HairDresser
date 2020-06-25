@@ -183,7 +183,7 @@ public class OrderSummary extends AppCompatActivity implements View.OnClickListe
                 initRecylerView(cartList);
                 setPriceSummary(cartList);
             } else{
-                displayToast(OrderSummary.this,false,"No Items in cart!");
+//                displayToast(OrderSummary.this,false,"No Items in cart!");
             }
         });
     }

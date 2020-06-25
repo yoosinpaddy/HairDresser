@@ -113,7 +113,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/makePayment"
                 android:background="@drawable/fab_background"
@@ -122,9 +123,19 @@
                 android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:textSize="22sp"
                 android:layout_margin="@dimen/size_4dp"
                 android:text="Make Payment"/>
+
+            <RatingBar android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:numStars="5"
+                android:stepSize="0.5"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

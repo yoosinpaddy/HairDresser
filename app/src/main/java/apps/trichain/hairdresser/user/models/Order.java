@@ -28,6 +28,9 @@ public class Order implements Serializable {
     @SerializedName("paypal_id")
     @Expose
     private Object paypalId;
+    @SerializedName("rating")
+    @Expose
+    private Float rating;
     @SerializedName("created_at")
     @Expose
     private String createdAt;
@@ -86,6 +89,14 @@ public class Order implements Serializable {
 
     public void setPaypalId(Object paypalId) {
         this.paypalId = paypalId;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 
     public String getCreatedAt() {
