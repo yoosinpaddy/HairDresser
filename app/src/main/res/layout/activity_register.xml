@@ -13,10 +13,11 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="150dp"
+            android:layout_width="250dp"
             android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:contentDescription="@string/logo"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/logo" />
 
         <View

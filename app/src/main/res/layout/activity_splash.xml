@@ -14,10 +14,10 @@
         android:layout_height="match_parent">
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo"
-        android:layout_margin="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:srcCompat="@mipmap/ic_launcher_foreground"
+        android:layout_margin="3dp"
         android:layout_centerInParent="true"
         android:contentDescription="@string/logo" />
 
@@ -27,9 +27,9 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_margin="20dp"
-        android:background="@drawable/progress_background"
+        android:background="@drawable/edit_white_dull"
         android:padding="@dimen/size_4dp"
-        android:outlineAmbientShadowColor="#000000"
+        android:outlineAmbientShadowColor="@color/colorAccent"
         android:progressTint="@color/colorWhite"
         android:progress="0"
         android:max="100"
