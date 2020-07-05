@@ -78,6 +78,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
                 Log.e("onCreate: ", String.valueOf(carst.size()));
             }
         });
+        ((TextView)findViewById(R.id.title)).setText(titlecrt);
     }
 
 
@@ -103,7 +104,6 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
             startActivity(new Intent(ServiceDetailActivity.this,CartItemsActivity.class));
             overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
         });
-
 
     }
 
@@ -176,7 +176,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
     private void initSlider() {
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.centerCrop();
+        requestOptions.fitCenter();
         //.diskCacheStrategy(DiskCacheStrategy.NONE)
         //.placeholder(R.drawable.placeholder)
         //.error(R.drawable.placeholder);

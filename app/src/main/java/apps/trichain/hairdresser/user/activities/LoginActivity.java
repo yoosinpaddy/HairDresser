@@ -124,8 +124,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 disableUI(false);
                 UserResponse msg = response.body();
                 if (response.isSuccessful()) {
-                    Log.e("successlogin", "......" + response);
+                    Log.e("successlogin", "......" + response.body());
                     if (msg != null) {
+                        Log.e(TAG, "onResponse: "+msg.toString() );
                         if (!msg.getError()) {
                             AppUtils.displayToast(LoginActivity.this, true, msg.getMessage());
                             sharedPrefManager.customerLogin(

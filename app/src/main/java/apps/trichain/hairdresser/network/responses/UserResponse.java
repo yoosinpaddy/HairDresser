@@ -17,7 +17,7 @@ public class UserResponse {
     private User user;
 
     public Boolean getError() {
-        return error;
+        return error==null?false:true;
     }
 
     public void setError(Boolean error) {
@@ -25,7 +25,7 @@ public class UserResponse {
     }
 
     public String getMessage() {
-        return message;
+        return message==null?"":message;
     }
 
     public void setMessage(String message) {
@@ -40,4 +40,12 @@ public class UserResponse {
         this.user = user;
     }
 
+    @Override
+    public String toString() {
+        return "UserResponse{" +
+                "error=" + getError() +
+                ", message='" + getMessage() + '\'' +
+                ", user=" + user.toString() +
+                '}';
+    }
 }

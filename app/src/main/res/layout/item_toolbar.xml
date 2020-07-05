@@ -43,7 +43,7 @@
                 android:layout_centerHorizontal="true"
                 android:text="Service"
                 android:textColor="@color/colorWhite"
-                android:textSize="14sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 />
             <ImageView

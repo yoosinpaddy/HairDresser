@@ -70,7 +70,7 @@ public class User {
     }
 
     public String getToken() {
-        return token;
+        return token==null?"":token;
     }
 
     public void setToken(String token) {
@@ -79,7 +79,7 @@ public class User {
 
 
     public String getPhone() {
-        return phone;
+        return phone==null?"":phone;
     }
 
     public void setPhone(String phone) {
@@ -92,5 +92,19 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + getId() +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + getPhone() + '\'' +
+                ", city='" + city + '\'' +
+                ", userType='" + userType + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", token='" + getToken() + '\'' +
+                '}';
     }
 }
