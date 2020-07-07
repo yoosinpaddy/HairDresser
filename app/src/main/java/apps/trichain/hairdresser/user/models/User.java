@@ -5,28 +5,28 @@ import com.google.gson.annotations.SerializedName;
 public class User {
 
     @SerializedName("id")
-    @Expose
+    
     private Integer id;
     @SerializedName("name")
-    @Expose
+    
     private String name;
     @SerializedName("email")
-    @Expose
+    
     private String email;
     @SerializedName("phone")
-    @Expose
+    
     private String phone;
     @SerializedName("city")
-    @Expose
+    
     private String city;
     @SerializedName("user_type")
-    @Expose
+    
     private String userType;
     @SerializedName("created_at")
-    @Expose
+    
     private String createdAt;
     @SerializedName("token")
-    @Expose
+    
     private String token;
 
     public Integer getId() {

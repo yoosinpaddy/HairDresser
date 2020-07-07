@@ -7,17 +7,17 @@ import apps.trichain.hairdresser.user.models.User;
 
 public class UserResponse {
     @SerializedName("error")
-    @Expose
+    
     private Boolean error;
     @SerializedName("message")
-    @Expose
+    
     private String message;
     @SerializedName("user")
-    @Expose
+    
     private User user;
 
     public Boolean getError() {
-        return error==null?false:true;
+        return error==null?false:error;
     }
 
     public void setError(Boolean error) {
