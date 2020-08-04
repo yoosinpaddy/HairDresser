@@ -3,37 +3,15 @@
     <dimen name="size_2dp">2dp</dimen>
     <dimen name="size_4dp">4dp</dimen>
 
-    <dimen name="margin_xsmall">3dp</dimen>
-    <dimen name="margin_small">5dp</dimen>
     <dimen name="margin">10dp</dimen>
     <dimen name="margin_large">15dp</dimen>
     <dimen name="margin_medium">13dp</dimen>
     <dimen name="margin_xlarge">20dp</dimen>
     <dimen name="margin_xxlarge">22dp</dimen>
-    <dimen name="margin_xx_medium_large">24dp</dimen>
     <dimen name="margin_xxxlarge">29dp</dimen>
     <dimen name="margin_xxxxlarge">35dp</dimen>
-    <dimen name="margin_xxxxxlarge">40dp</dimen>
-    <dimen name="margin_xxxxxxlarge">45dp</dimen>
-    <dimen name="margin_xxxxxxxlarge">60dp</dimen>
     <dimen name="margin_xxxxxxxxlarge">65dp</dimen>
-    <dimen name="onboarding_fragment_padding">90dp</dimen>
 
-    <dimen name="padding_xxsmall">4dp</dimen>
-    <dimen name="padding_xsmall">5dp</dimen>
-    <dimen name="padding_small">8dp</dimen>
     <dimen name="padding">10dp</dimen>
-    <dimen name="padding_xmedium">11dp</dimen>
-    <dimen name="padding_small_medium">12dp</dimen>
-    <dimen name="padding_medium">14dp</dimen>
-    <dimen name="padding_large">15dp</dimen>
-    <dimen name="padding_medium_large">16dp</dimen>
-    <dimen name="padding_mm_large">18dp</dimen>
-    <dimen name="padding_xlarge">22dp</dimen>
-    <dimen name="padding_xxlarge">25dp</dimen>
-    <dimen name="padding_xx_xlarge">26dp</dimen>
-    <dimen name="padding_xxxlarge">28dp</dimen>
-    <dimen name="padding_xxxxlarge">50dp</dimen>
-    <dimen name="padding_xxxxxlarge">55dp</dimen>
     <dimen name="dimen_8dp">8dp</dimen>
 </resources>
