@@ -28,7 +28,7 @@ public abstract class SwipeToDeleteCallback extends ItemTouchHelper.Callback {
     protected SwipeToDeleteCallback(Context context) {
         mContext = context;
         mBackground = new ColorDrawable();
-        backgroundColor = Color.parseColor("#CB4A40");
+        backgroundColor = Color.parseColor("#009EC7");
         mClearPaint = new Paint();
         mClearPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         deleteDrawable = ContextCompat.getDrawable(mContext, android.R.drawable.ic_menu_delete);

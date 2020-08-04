@@ -15,7 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".user.activities.RatingActivity"></activity>
+        <activity
+            android:name=".user.activities.passwordreset.ResetPassword"
+            android:theme="@style/AppThemeMaterial"/>
+        <activity android:name=".user.activities.RatingActivity" />
         <activity
             android:name=".user.activities.OrdersCategoryActivity"
             android:theme="@style/AppThemeMaterial" />

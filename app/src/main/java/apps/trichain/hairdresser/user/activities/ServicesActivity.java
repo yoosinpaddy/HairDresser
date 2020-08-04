@@ -48,7 +48,7 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
     private ProgressBar progress;
     private LinearLayout internet_error,error_view;
     private  String _token;
-    private TextView retry,orders,error_retry;
+    private TextView retry,orders,error_retry,logout;
     private SwipeRefreshLayout swipe_refresh;
     private SearchView service_Search;
     LinearLayout queryview;
@@ -76,10 +76,12 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
         internet_error = findViewById(R.id.internet_error);
         error_retry = findViewById(R.id.error_retry);
         retry = findViewById(R.id.retry);
+        logout = findViewById(R.id.logout);
         service_Search = findViewById(R.id.service_Search);
         error_retry.setOnClickListener(this);
         retry.setOnClickListener(this);
         orders.setOnClickListener(this);
+        logout.setOnClickListener(this);
         badgeView = new BadgeView(this);
         swipe_refresh.setOnRefreshListener(this::onRefresh);
         service_Search.setOnClickListener(this);
@@ -125,6 +127,13 @@ public class ServicesActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.service_Search:
                 service_Search.onActionViewExpanded();
+                break;
+            case R.id.logout:
+                sharedPrefManager.customerLogout();
+                sharedPrefManager.logoutCustomer();
+                startActivity(new Intent(ServicesActivity.this,LoginActivity.class));
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                finish();
                 break;
         }
 

@@ -156,7 +156,7 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
                         bitmapimage = BitmapFactory.decodeStream(url.openConnection().getInputStream());
                         if (bitmapimage ==null){
                             bitmapimage = BitmapFactory.decodeResource(this.getResources(), R.drawable.logo);
-                            displayToast(ServiceDetailActivity.this,false,"nulling");
+//                            displayToast(ServiceDetailActivity.this,false,"nulling");
                         }
                     } catch(IOException e) {
                         System.out.println(e);

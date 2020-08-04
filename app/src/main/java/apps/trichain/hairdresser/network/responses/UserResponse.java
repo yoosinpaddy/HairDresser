@@ -40,12 +40,5 @@ public class UserResponse {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "UserResponse{" +
-                "error=" + getError() +
-                ", message='" + getMessage() + '\'' +
-                ", user=" + user.toString() +
-                '}';
-    }
+
 }

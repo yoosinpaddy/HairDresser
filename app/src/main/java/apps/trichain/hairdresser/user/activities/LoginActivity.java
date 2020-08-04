@@ -19,6 +19,7 @@ import java.util.Objects;
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.network.ApiService;
 import apps.trichain.hairdresser.network.responses.UserResponse;
+import apps.trichain.hairdresser.user.activities.passwordreset.ResetPassword;
 import apps.trichain.hairdresser.utils.AppUtils;
 import apps.trichain.hairdresser.utils.NetworkUtils;
 import apps.trichain.hairdresser.utils.SharedPrefManager;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputEditText email;
     private TextInputEditText password;
     private MaterialButton loginbutton;
-    private TextView createAccount;
+    private TextView createAccount,forgot_password;
     private TextInputLayout passwordlayout, passlayout;
     ProgressBar progress;
     ImageView logo, logo2;
@@ -67,11 +68,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginbutton = findViewById(R.id.login);
         progress = findViewById(R.id.progress);
         createAccount = findViewById(R.id.createAccount);
+        forgot_password = findViewById(R.id.forgot_password);
 
         apiService = AppUtils.getApiService();
         sharedPrefManager = SharedPrefManager.getInstance(this);
         loginbutton.setOnClickListener(this);
         createAccount.setOnClickListener(this);
+        forgot_password.setOnClickListener(this);
     }
 
 
@@ -110,6 +113,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
                 break;
+            case R.id.forgot_password:
+                startActivity(new Intent(LoginActivity.this, ResetPassword.class));
+                overridePendingTransition(R.anim.transition_slide_in_right, R.anim.transition_slide_out_left);
+                break;
 
         }
     }
@@ -142,9 +149,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     }
                 } else {
-                    AppUtils.displayToast(LoginActivity.this, false, "Something Bad Happened");
                     Log.e("error", "...." + response);
-                    AppUtils.displayToast(LoginActivity.this, false, "Please try Again");
+                    AppUtils.displayToast(LoginActivity.this, false, "An error occurred. Please try Again");
 
                 }
             }
@@ -169,12 +175,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             isLoading = true;
             email.setEnabled(false);
             password.setEnabled(false);
+            createAccount.setEnabled(false);
+            forgot_password.setEnabled(false);
             hideView(loginbutton);
             showView(progress);
         } else {
             isLoading = false;
             email.setEnabled(true);
             password.setEnabled(true);
+            createAccount.setEnabled(true);
+            forgot_password.setEnabled(true);
             hideView(progress);
             showView(loginbutton);
         }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import apps.trichain.hairdresser.network.responses.OrderResponse;
 import apps.trichain.hairdresser.network.responses.OrderStoreResponse;
+import apps.trichain.hairdresser.network.responses.ResetResponse;
 import apps.trichain.hairdresser.network.responses.ServiceResponse;
 import apps.trichain.hairdresser.network.responses.UserResponse;
 import retrofit2.Call;
@@ -33,6 +34,26 @@ public interface ApiService {
     @FormUrlEncoded
     @POST("newlogin")
     Call<UserResponse> userLogin(
+            @Field("email") String email,
+            @Field("password") String password
+    );
+
+    @FormUrlEncoded
+    @POST("forgotpassword")
+    Call<ResetResponse> forgotpassword(
+            @Field("email") String email
+    );
+
+    @FormUrlEncoded
+    @POST("tokenconnfrm")
+    Call<ResetResponse> tokenconnfrm(
+            @Field("email") String email,
+            @Field("token") String token
+    );
+
+    @FormUrlEncoded
+    @POST("changePassword")
+    Call<ResetResponse> changePassword(
             @Field("email") String email,
             @Field("password") String password
     );

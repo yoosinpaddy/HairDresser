@@ -19,3 +19,18 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-dontwarn okio.**
+-dontwarn javax.annotation.Nullable
+-dontwarn javax.annotation.ParametersAreNonnullByDefault
+-dontwarn com.squareup.okhttp.**
+
+-keep class com.google.** { *; }
+-keep class com.github.** { *; }
+-keep class com.android.** { *; }
+-keep class junit.** { *; }
+-keep class apps.trichain.hairdresser.user.models.** { *; }
+-keepclassmembers class apps.trichain.hairdresser.user.models.** { *; }
+
+-keep class apps.trichain.hairdresser.network.responses.** { *; }
+-keepclassmembers class apps.trichain.hairdresser.network.responses.** { *; }
