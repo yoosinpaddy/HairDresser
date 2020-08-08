@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_4dp"
                     android:background="@drawable/price_background"
-                    android:fontFamily="@font/crimson_bold"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="4dp"
                     android:paddingStart="@dimen/size_4dp"
                     android:text="Ksh. 1,000"
