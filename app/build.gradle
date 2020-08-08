@@ -11,7 +11,7 @@ android {
     }
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
-
+//password 123mruc!@
     defaultConfig {
         applicationId "apps.trichain.hairdresser"
         minSdkVersion 19

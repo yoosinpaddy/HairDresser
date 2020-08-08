@@ -2,15 +2,12 @@ package apps.trichain.hairdresser.user.adapters;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,8 +18,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+
 import apps.trichain.hairdresser.R;
 import apps.trichain.hairdresser.user.models.Image;
 import apps.trichain.hairdresser.user.models.Service;
@@ -173,31 +170,36 @@ public class ServiceAdpater extends RecyclerView.Adapter<BaseViewHolder> impleme
             Service service = getItem(position);
 
             List<Image> imageList = service.getImage();
-            String featuredimage=null;
+            String featuredimage = null;
             for (int i = 0; i < imageList.size(); i++) {
-                Image images= imageList.get(i);
-               if (images.getType().equals("main_image")){
-                   featuredimage = images.getImage_path();
-                   break;
-               }
+                Image images = imageList.get(i);
+                if (images.getType().equals("main_image")) {
+                    featuredimage = images.getImage_path();
+                    break;
+                }
             }
-        Glide.with(activity)
-                .load( featuredimage)
-                .transition(DrawableTransitionOptions.withCrossFade(500))
-                .placeholder(R.drawable.logo)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .fallback(R.drawable.logo)
-                .into(img_service);
+            new Handler().postDelayed(() -> {
+
+            },500);
+            Glide.with(activity)
+                    .load(featuredimage)
+//                    .transition(DrawableTransitionOptions.withCrossFade(500))
+                    .placeholder(R.drawable.logo)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .fallback(R.drawable.logo)
+                    .into(img_service);
 
             tv_service_name.setText(service.getTitle());
             tv_service_price.setText(AppUtils.FormatCurrency(Integer.parseInt(service.getPrice())));
 
         }
     }
+
     public static class ProgressHolder extends BaseViewHolder {
         ProgressHolder(View itemView) {
             super(itemView);
         }
+
         @Override
         protected void clear() {
         }
