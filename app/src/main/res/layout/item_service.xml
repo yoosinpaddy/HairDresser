@@ -33,7 +33,7 @@
             android:layout_below="@+id/img_service"
             android:layout_marginTop="@dimen/size_4dp"
             android:background="@drawable/price_background"
-            android:fontFamily="@font/crimson_bold"
+            android:fontFamily="@font/roboto_bold"
             android:layout_margin="8dp"
             android:padding="2dp"
             android:paddingStart="@dimen/size_4dp"

@@ -184,7 +184,7 @@ public class MyOrdersActivity extends AppCompatActivity  implements View.OnClick
             if (order.getStatus() == 2){
                 InProgressOrderList.add(order);
                 inProgressOrders++;
-            }else if(order.getStatus() == 3){
+            }else if(order.getStatus() == 3 || order.getStatus() == 5){
                 completedOrderList.add(order);
                 completedOrders++;
             }else if (order.getStatus() == 1){

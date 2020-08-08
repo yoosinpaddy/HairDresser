@@ -56,7 +56,8 @@ public class AppUtils {
     private static final int DAY_MILLIS = 24 * HOUR_MILLIS;
 //    public static final String BASE_URL = "http://192.168.43.106:8000/api/";
 //    public static final String BASE_URL = "http://admin.jamesrobin.gadaiweb.com/api/";
-    public static final String BASE_URL = "https://haristylist.mati.co.ke/api/";
+//    public static final String BASE_URL = "https://haristylist.mati.co.ke/api/";
+    public static final String BASE_URL = "https://lovinghandshygiene.com/api/";
     static boolean alreadyAnimatedDown, alreadyAnimatedUp;
 
     public static ApiService getApiService() {

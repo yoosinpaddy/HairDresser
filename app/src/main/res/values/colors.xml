@@ -4,33 +4,15 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#009EC7</color>
     <color name="colorWhite">#ffff</color>
-    <color name="colorWhiteDull">#CFCFCF</color>
     <color name="colorBlack">#000000</color>
     <color name="black_dull">#3A3A3A</color>
 
     <color name="colorbluedarklight">#00b8fe</color>
-    <color name="colorlightBlue">#E3F4FD</color>
-    <color name="hairWhite">#ffffff</color>
-    <color name="hairYellow">#AAA312</color>
-    <color name="hairWhiteTransparent">#80ffffff</color>
     <color name="red">#FF0000</color>
-    <color name="Hibiscusred">#b43757</color>
-    <color name="Burgundyred">#8D021F</color>
-    <color name="Salmonred">#FA8072</color>
-    <color name="Crimsonred">#B80F0A</color>
-    <color name="mblue">#064A5F</color>
-    <color name="darkLime">#827717</color>
     <color name="hair_orange">#FF8000</color>
-    <color name="hair_blue">#008484</color>
     <color name="hair_green">#44BB84</color>
-    <color name="black_overlay">#66000000</color>
     <color name="black">#000000</color>
-    <color name="lblack">#000000</color>
     <color name="Lgrey">#f9ebd2</color>
-    <color name="hairred">#eb1313</color>
     <color name="bluegreen">#008080</color>
-    <color name="hairLightgrey">#EBEBEB</color>
-    <color name="colorPrimaryLight">#EBEBEB</color>
-    <color name="hairgrey">#A0A0A0</color>
 
 </resources>

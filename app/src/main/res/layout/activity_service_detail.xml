@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/size_4dp"
                     android:background="@drawable/price_background"
-                    android:fontFamily="@font/crimson_bold"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="4dp"
                     android:paddingStart="@dimen/size_4dp"
                     android:text="Ksh. 1,000"
@@ -76,27 +76,23 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"/>
 
-
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/addtocart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/button_background"
+                    android:text="@string/add_to_cart"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </ScrollView>
 
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/addtocart"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/button_background"
-            android:text="@string/add_to_cart"
-            android:textAllCaps="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="14sp"
-            android:textStyle="bold" />
 
     </RelativeLayout>
 </layout>

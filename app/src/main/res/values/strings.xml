@@ -3,23 +3,25 @@
     <string name="app_name2">Loving Hands</string>
     <string name="logo">Logo</string>
     <string name="login_account">Login Account</string>
-    <string name="username">Username</string>
+    <string name="update_pass_text">Update Password</string>
     <string name="login">Login</string>
+    <string name="forgot_text">Please enter your email address to receive a reset code.</string>
+    <string name="confirm_code">Please enter the verification code sent to your email address.</string>
     <string name="forgot_password">Forgot Password</string>
     <string name="create_account">Create Account</string>
+    <string name="cancel">Cancel</string>
     <string name="create_new_account">Create New Account</string>
     <string name="pass">Password</string>
     <string name="first_name">First Name</string>
     <string name="surname">Surname</string>
+    <string name="new_pass">New password</string>
+    <string name="reset_code">Reset Code</string>
     <string name="email">Email</string>
     <string name="repeat_password">Repeat password</string>
     <string name="contact_number">Contact Number</string>
     <string name="save">Save</string>
     <string name="already_have_an_account_login">Already have an account? Login</string>
     <string name="enter_location">Your Address Details</string>
-    <string name="back">Back</string>
-    <string name="service_example">Bridal hair</string>
-    <string name="service_title">Select Service Needed</string>
     <string name="city">City</string>
     <string name="added_successfully">Added Successfully</string>
 
@@ -27,26 +29,19 @@
     <string name="error_input">required *</string>
     <string name="pass_error_input">Password mismatch</string>
     <string name="service_featured_image">service featured image</string>
-    <string name="service_name">Service Name</string>
     <string name="no_internet_conection">No internet conection</string>
     <string name="data_check">Please turn on your mobile data or wifi</string>
     <string name="retry">Retry</string>
     <string name="add_to_cart">Add To Cart</string>
     <string name="checkout">Checkout</string>
-    <string name="service">Service</string>
-    <string name="services">Services</string>
-    <string name="total_price">Total Price: </string>
-    <string name="payment_price">Pay: </string>
     <string name="empty_cart">Your Cart is Empty</string>
-    <string name="address_title">Address</string>
     <string name="no_address_found">No Address found!</string>
     <string name="add_address">Add Address</string>
-    <string name="change_address">Change Address</string>
     <string name="submit">Submit</string>
-    <string name="total_services">Total Services</string>
-    <string name="address_description">Description</string>
     <string name="waiting_approval">Waiting Approval</string>
     <string name="in_progress">In progress</string>
     <string name="completed_order">Completed</string>
     <string name="waiting_payment">Waiting Payment</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>
