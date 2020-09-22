@@ -146,10 +146,8 @@ public class ServiceDetailActivity extends AppCompatActivity  implements BaseSli
         imgaurls = new ArrayList<>();
         for (int i = 0; i < imageList.size(); i++) {
             Image images= imageList.get(i);
-            if (images.getType().equals("gallery")){
-                imgaurls.add(images.getImage_path());
-                Log.e("Msg: image: ", "----- "+images.getImage_path());
-            }else if (images.getType().equals("main_image")){
+            imgaurls.add(images.getImage_path());
+            if (images.getType().equals("main_image")){
                 Thread thread = new Thread(() -> {
                     try {
                         URL url = new URL(images.getImage_path());
